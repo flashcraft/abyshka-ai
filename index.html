@@ -1,0 +1,1457 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1120">
+<title>Abyshka.ai</title>
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="apple-touch-icon" href="./icons/icon-180.png">
+<link rel="icon" type="image/png" href="./icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Abyshka.ai">
+<meta name="application-name" content="Abyshka.ai">
+<meta name="description" content="Abyshka.ai — персональный AI-помощник, чаты, творчество и планирование поездок.">
+<style>
+:root{color-scheme:dark;--bg:#070d18;--panel:#111a2c;--panel2:#16243b;--stroke:#2f4465;--text:#eef4ff;--muted:#9cb1cf;--accent:#9d84ff;--accent2:#53c1ff;--green:#4fd39f}
+*{box-sizing:border-box}html,body{height:100%}body{margin:0;background:radial-gradient(circle at 80% -10%,#293669 0,transparent 34%),linear-gradient(180deg,#09101d,#070c16);color:var(--text);font:15px system-ui,-apple-system,Segoe UI,sans-serif}
+button,input,textarea,select{font:inherit}button{cursor:pointer;color:inherit}
+#app{display:flex;height:100dvh;overflow:hidden}.side{width:268px;flex:0 0 268px;background:#0d1523;border-right:1px solid var(--stroke);padding:18px 13px;display:flex;flex-direction:column;gap:14px}.brand{display:flex;align-items:center;gap:10px;padding:8px 9px;font-weight:800;font-size:21px}.logo{display:grid;place-items:center;width:42px;height:42px;border-radius:15px;background:linear-gradient(135deg,#cb8fff,#5d71ff);box-shadow:0 10px 28px #7f77ff44;font-size:22px}.side button,.header button,.tools button,.quickBtn,.chip{border:1px solid var(--stroke);border-radius:12px;background:#17263d;padding:10px 12px}.primary{background:linear-gradient(120deg,#7a5bf2,#5f7cff)!important;border-color:#9a87ff!important;font-weight:700}.chats{flex:1;overflow:auto;padding-right:2px}.chatItem{border:1px solid transparent;border-radius:12px;padding:11px 10px;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;color:#c2d0e7}.chatItem.active{background:#20324f;border-color:#4f6a90;color:#fff}.sideFoot{font-size:12px;color:var(--muted);padding:8px;line-height:1.55}.main{flex:1;min-width:0;display:flex;flex-direction:column}.header{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #273754;padding:13px 20px;background:#10192ad9;backdrop-filter:blur(10px);gap:10px}.header strong{font-size:17px}.status{font-size:12px;color:#afc0d9}.tools{display:flex;gap:7px;align-items:center;flex-wrap:wrap}.tools .toggleOn{background:#1f3758;border-color:#7fc9ff;color:#e9f7ff}.messages{flex:1;overflow:auto;overscroll-behavior:contain;padding:24px max(16px,calc((100% - 860px)/2)) 34px;display:flex;flex-direction:column;gap:22px}.msg{display:flex;align-items:flex-start;gap:12px;max-width:100%}.user{flex-direction:row-reverse}.avatar{width:34px;height:34px;flex:0 0 34px;border-radius:12px;background:#2c3d5c;display:grid;place-items:center;font-size:14px;font-weight:700}.assistant .avatar{background:linear-gradient(135deg,#7f63ea,#4b7ce2)}.bubble{white-space:pre-wrap;line-height:1.62;max-width:100%;overflow-wrap:anywhere;padding-top:4px}.user .bubble{max-width:min(85%,660px);background:#223454;border-radius:16px;padding:11px 15px}.assistant .bubble .card{margin-top:10px}.thinking{display:inline-flex;align-items:center;gap:6px;color:#cfe0fb}.thinking i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#95b6ff;animation:b 1.2s infinite}.thinking i:nth-child(2){animation-delay:.15s}.thinking i:nth-child(3){animation-delay:.3s}@keyframes b{0%,80%,100%{transform:scale(.65);opacity:.55}40%{transform:scale(1);opacity:1}}
+.composer{padding:12px max(16px,calc((100% - 860px)/2)) calc(16px + env(safe-area-inset-bottom));background:linear-gradient(transparent,#0b1220 16%)}.modeBar{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px}.modeBar button{border:1px solid #395177;border-radius:12px;padding:10px 14px;background:#132339;color:#cad9f3;font-weight:700}.modeBar button.selected{background:#40348d;border-color:#b69cff;color:#fff}.replySizer{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:9px;font-size:12px;color:#a8bddc}.replySizer button{border:1px solid #374965;border-radius:9px;background:#16243b;padding:6px 9px;font-size:12px}.replySizer button.selected{background:#40348d;border-color:#a38dff}.replySizer #knowledgeCount{margin-left:auto}.composerHint{font-size:12px;color:#a8bbd9;margin:2px 0 9px;min-height:18px}.inputWrap{border:1px solid #41567a;background:#16243a;border-radius:20px;padding:11px;display:flex;align-items:flex-end;gap:8px;box-shadow:0 10px 35px #0004}textarea{flex:1;resize:none;border:none;outline:none;background:transparent;color:#fff;min-height:28px;max-height:145px;line-height:1.48;padding:5px;font-size:15px}textarea::placeholder{color:#91a4c3}.send{border:none;border-radius:13px;background:linear-gradient(135deg,#8d73ff,#54bbff);width:44px;height:44px;flex:0 0 44px;font-weight:800;font-size:19px}.send:disabled{opacity:.45}.hint{margin-top:10px;text-align:center;font-size:11px;color:#8ea3c3}.welcome{margin:auto 0;display:flex;flex-direction:column;align-items:center;text-align:center;gap:15px}.welcome h1{margin:0;font-size:clamp(26px,4vw,39px)}.welcome p{margin:0;color:#b7c7dc;max-width:560px;line-height:1.56}.prompts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;width:min(100%,670px);margin-top:12px}.prompt{border:1px solid #344767;padding:14px 12px;border-radius:14px;background:#18253a;text-align:left;font-size:13px}.prompt:hover{border-color:#ab95ff}.card{background:linear-gradient(180deg,#18263b,#131e31);border:1px solid #34496b;border-radius:16px;padding:12px}.artImage{display:block;width:min(100%,640px);max-height:520px;object-fit:contain;border-radius:16px;margin:10px 0 4px;box-shadow:0 18px 55px #0007}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.actions button,.actions a{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;border:1px solid #556b91;background:#233b5e;border-radius:10px;padding:8px 12px;color:#fff}.meta{font-size:11px;color:#afc0d8;margin-top:6px}.tripBox{display:grid;gap:10px}.tripDay{background:#1b2940;border:1px solid #364d72;border-radius:13px;padding:10px 11px}.tripDay strong{display:block;color:#d6e8ff;margin-bottom:5px}.tripList{margin:0;padding-left:18px}.pillRow{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.pill{font-size:11px;background:#24344c;border:1px solid #405372;color:#cfe1fa;padding:5px 8px;border-radius:999px}.budgetGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.budgetItem{background:#1a273d;border:1px solid #364b70;border-radius:12px;padding:8px 10px}.budgetItem b{display:block;color:#d8ebff;margin-bottom:2px}.mobileOnly{display:none}.veil{display:none}dialog{background:#111b2d;color:#fff;border:1px solid #465879;border-radius:18px;padding:0;max-width:min(94vw,520px);width:100%;box-shadow:0 20px 80px #000a}dialog::backdrop{background:#000a}.modal{padding:20px}.modal h2{margin:0 0 10px}.modal p{font-size:13px;color:#b1c2d7;line-height:1.6}.modal label{display:block;font-size:13px;color:#bdc9dc;margin:15px 0 5px}.modal input,.modal select{width:100%;padding:12px;color:#fff;border:1px solid #405674;background:#19283f;border-radius:10px;outline:0}.modal .actions{display:flex;gap:8px;justify-content:end;margin-top:20px}
+@media(max-width:760px){.side{position:fixed;z-index:10;inset:0 auto 0 0;transform:translateX(-100%);transition:transform .2s;width:min(80vw,290px)}body.sideOpen .side{transform:translateX(0)}body.sideOpen .veil{display:block;position:fixed;inset:0;background:#0008;z-index:9}.mobileOnly{display:block}.header{padding:12px 13px}.messages{padding:18px 14px}.prompts{grid-template-columns:1fr}.composer{padding:10px 10px calc(10px + env(safe-area-inset-bottom))}.tools button{padding:8px 10px}.budgetGrid{grid-template-columns:1fr}}
+
+.songStudio{margin-top:10px;padding:13px;border:1px solid #5e578d;border-radius:15px;background:linear-gradient(145deg,#262044,#142339)}
+.songStudio h3{margin:0 0 8px;font-size:17px}.songStudio pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;font-size:13px;line-height:1.55;background:#111c30;border-radius:10px;padding:12px;max-height:180px;overflow:auto}
+.songStudio .controls{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.songStudio button{border:1px solid #8174cb;border-radius:10px;padding:9px 11px;background:#3d3675;color:white}
+.songStudio button:disabled{opacity:.5}.songStudio .songFacts{font-size:12px;color:#bdc9e9;line-height:1.5;margin-top:8px}
+.songStudio .wave{display:flex;align-items:center;gap:3px;height:34px;margin-top:12px}.songStudio .wave span{width:5px;border-radius:3px;background:linear-gradient(#a9acff,#57c9ff)}
+
+/* Abyshka v10 controls */
+.modePicker{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:7px 0 10px;font-size:12px;color:#c4d6f7}.modePicker button{padding:7px 12px;border-radius:10px;border:1px solid #3e5276;background:#172740;color:#c6d7f4}.modePicker button.selected{background:#413587;border-color:#a993ff;color:white}
+#photoPanel{display:none;margin:5px 0 9px;background:#16243c;border:1px solid #3a5176;border-radius:12px;padding:10px}#photoPanel input[type=file]{width:100%;font-size:12px}#photoPanel label{font-size:12px;display:block;margin:8px 0 2px;color:#c3d6ef}#photoPanel input[type=range]{width:100%;accent-color:#a88eff}.photoPreview{max-height:180px;max-width:100%;border-radius:12px;display:block;margin:9px auto;background:#0d1626}.photoBtns{display:flex;flex-wrap:wrap;gap:6px}.photoBtns button{border:1px solid #596d93;border-radius:9px;background:#243a5f;color:white;padding:7px 9px}.smallNote{color:#afc4e3;font-size:11px;line-height:1.5}
+@media(max-width:760px){.modePicker button{padding:7px 9px}.modeBar button{padding:9px 10px;font-size:13px}}
+
+#tripPanel{display:none;margin:5px 0 10px;padding:12px;border:1px solid #4b6188;border-radius:14px;background:#142239}
+.tripFields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.tripFields label{font-size:12px;color:#c5d7ef;display:flex;flex-direction:column;gap:5px}
+.tripFields input,.tripFields select,#voiceSelect{width:100%;min-width:0;background:#1c2d49;color:#fff;border:1px solid #516a91;border-radius:9px;padding:9px}
+.hotelLink{display:inline-flex;padding:9px 12px;border-radius:10px;background:#263f65;border:1px solid #6687b5;color:#f4f7ff;text-decoration:none;margin:5px 7px 5px 0}
+.voiceControls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.voiceControls button{padding:8px 11px;background:#35447b;color:#fff;border:1px solid #7585c3;border-radius:10px}
+#voiceSelect{flex:1;min-width:140px}
+@media(max-width:480px){.tripFields{grid-template-columns:1fr}}
+
+/* v12: прокрутка истории и карточки жилья */
+html,body,#app,.main{min-height:0}.main{overflow:hidden}.messages{min-height:0;overflow-y:auto;overflow-x:hidden;flex:1 1 0;touch-action:pan-y;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:#667fa9 transparent;align-items:stretch}.msg{flex-shrink:0}.welcome{flex-shrink:0}
+/* Hotel recommendations: offline illustrations, not actual property photos */
+.hotelCards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,225px),1fr));gap:12px;margin:12px 0}
+.hotelOffer{border:1px solid #3b5578;border-radius:15px;background:#16253c;overflow:hidden;min-width:0}
+.hotelOffer.recommended{border-color:#9f90ff;box-shadow:0 0 0 1px #7e72dd66}
+.hotelPicture{display:block;width:100%;height:148px;object-fit:cover;background:#263550}
+.hotelOfferBody{padding:12px}.hotelOfferTitle{font-weight:750;font-size:15px;margin:0 0 6px}
+.hotelOfferRating{color:#ffd77b;font-size:13px;margin:4px 0 9px}.hotelOfferText{font-size:12px;line-height:1.55;color:#cbd9ec;min-height:67px}
+.hotelOfferButtons{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}
+.hotelOfferButtons button,.hotelOfferButtons a{display:inline-block;border-radius:9px;border:1px solid #617bae;padding:8px 10px;font-size:12px;text-decoration:none;color:#fff;background:#2b4267}
+.hotelOfferButtons button{background:#4c468e;border-color:#9387ed}.hotelOfferNote{font-size:11px;color:#bacbe6;line-height:1.5;margin:9px 0 0}
+.hotelProfiles{display:grid;gap:9px;margin-top:10px}.hotelProfile{border:1px solid #435e82;border-radius:12px;padding:11px;background:#13253e}.hotelProfile b{color:#e0edff}.hotelProfile p{margin:5px 0;color:#c8d9ec;font-size:13px;line-height:1.48}.hotelBest{border-color:#8f8df8;background:#252947}.chatLimit{font-size:11px;color:#b8cae6;margin:0 2px 5px}.tripSuggest{border:1px solid #4e6793;background:#243a5a;color:#fff;padding:9px 12px;border-radius:9px;margin-top:8px}
+
+/* v14: надёжная прокрутка чата на iPad и мобильных браузерах */
+html,body,#app,.main{min-height:0}
+.main{overflow:hidden}
+.messages{min-height:0;flex:1 1 0;overflow-y:auto!important;overflow-x:hidden;-webkit-overflow-scrolling:touch;touch-action:pan-y;scroll-behavior:auto;overflow-anchor:none}
+.composer{flex:0 0 auto}
+.hotelAdviceCard{margin-top:9px}
+
+/* v15 • clean, accessible ChatGPT-inspired workspace */
+:root{--bg:#111214;--panel:#18191b;--panel2:#242629;--stroke:#303236;--text:#ececec;--muted:#a0a0a5;--accent:#9f91ed;--accent2:#9f91ed;--green:#59cda5}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif}
+.side{background:var(--panel);border-right:1px solid var(--stroke);width:264px;flex-basis:264px;padding:17px 12px;gap:12px}
+.brand{font-size:19px;letter-spacing:-.6px}.brand .logo{width:34px;height:34px;border-radius:50%;background:#eee;color:#141414;box-shadow:none;font-size:21px}.brandTag{font-size:10px;color:var(--muted);font-weight:600;margin-left:auto;background:var(--panel2);padding:4px 7px;border-radius:8px}
+.side button,.header button,.tools button,.quickBtn,.chip{background:transparent;border:1px solid transparent;color:var(--text)}.side button:hover,.header button:hover,.tools button:hover,.chatItem:hover{background:var(--panel2)}
+.side .primary{background:#292a2d!important;border:1px solid #414145!important;text-align:left;padding:13px 14px;border-radius:13px;font-weight:650;box-shadow:none}
+.searchChats{background:#242528;border:1px solid var(--stroke);color:var(--text);width:100%;border-radius:12px;padding:11px;outline:0;font-size:13px}.searchChats:focus{border-color:var(--accent)}
+.sidebarActions{display:grid;grid-template-columns:1fr 1fr;gap:5px}.sidebarActions button{padding:9px 2px;font-size:12px;border:1px solid var(--stroke);border-radius:10px}
+.chatItem{color:var(--text);font-size:13px;padding:12px;border-radius:10px}.chatItem.active{background:#303034;border-color:transparent}.sideFoot{font-size:11px}
+.header{background:var(--bg);border-bottom:1px solid #25262a;padding:12px 20px}.header strong{font-size:17px;letter-spacing:-.3px}.status{color:var(--muted)}
+.tools{gap:3px}.tools button{padding:9px;border-radius:10px}.tools .toggleOn{color:var(--text);background:#242529;border:1px solid #33353a}
+.messages{gap:22px;padding-top:34px;padding-bottom:40px;max-width:100%;scrollbar-color:#505053 transparent}
+.msg{max-width:100%;gap:12px}.avatar{display:none}.bubble{line-height:1.7;padding:4px 0;max-width:100%;min-width:0}.assistant .bubble{width:100%}.user .bubble{padding:12px 17px;max-width:min(83%,650px);background:#292a2d;border-radius:19px;line-height:1.5}
+.messageActions{display:flex;align-items:center;gap:3px;margin-top:8px}.messageActions button{background:transparent;border:0;border-radius:8px;color:var(--muted);font-size:17px;padding:5px 9px;cursor:pointer}.messageActions button:hover{background:#292a2e;color:var(--text)}.user .messageActions{justify-content:flex-end}
+.composer{background:linear-gradient(180deg,transparent,var(--bg) 12%);padding-top:8px}.inputWrap{background:#26272a;border:1px solid #3d3f43;border-radius:24px;padding:11px 13px;box-shadow:0 8px 24px #0002;align-items:flex-end}.inputWrap:focus-within{border-color:#747079}textarea{color:var(--text);font-size:15px;padding:8px 5px;max-height:180px}.send{border-radius:50%;background:#ececec;color:#181818;width:37px;height:37px;flex-basis:37px;font-size:24px;line-height:1}
+.modeBar{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;gap:6px;padding:2px 0 4px}.modeBar::-webkit-scrollbar{display:none}.modeBar button,.modePicker button,.replySizer button{background:transparent;color:var(--muted);border:1px solid #33353a;border-radius:999px;white-space:nowrap;font-size:12px;font-weight:550;padding:8px 12px}.modeBar button.selected,.modePicker button.selected,.replySizer button.selected{background:#37313f;color:#f5eeff;border-color:#63546f}.modePicker{margin:3px 0 6px;gap:5px}.modePicker button{padding:5px 10px}.replySizer{margin-bottom:4px}.replySizer button{padding:5px 10px}.composerHint{display:none}.voiceControls{margin:6px 0 0;gap:5px}.voiceControls button,#voiceSelect{background:transparent;border:1px solid #33353a;border-radius:9px;color:var(--muted);padding:5px 8px;font-size:11px}#voiceSelect{max-width:240px}.hint{color:var(--muted);font-size:10px;margin-top:7px}
+.welcome{gap:15px;max-width:740px;align-self:center}.welcome>.logo{background:#e5e4e7!important;color:#151515;box-shadow:none!important;border-radius:50%!important}.welcome h1{font-size:clamp(28px,4vw,38px);font-weight:650;letter-spacing:-1px}.welcome p{color:var(--muted);max-width:540px}.prompts{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;max-width:620px}.prompt{background:#202124;border:1px solid #35363a;color:var(--text);border-radius:16px;padding:16px;text-align:left;min-height:66px}.prompt:hover{border-color:#89818c;background:#28292d}
+.card,.songStudio,.tripDay,.hotelOffer,#tripPanel,#photoPanel{background:var(--panel2);border-color:var(--stroke);color:var(--text)}.hotelOfferText,.hotelProfile p,.smallNote,.songStudio .songFacts{color:#c1c1c5}
+dialog{background:var(--panel);border-color:#49494d;color:var(--text)}dialog .modal p{color:var(--muted)}.modal input,.modal select{background:var(--panel2);border-color:var(--stroke);color:var(--text)}
+[data-theme="light"]{--bg:#fff;--panel:#f6f6f7;--panel2:#ededf0;--stroke:#dedee1;--text:#202124;--muted:#73757b}
+[data-theme="light"] body{background:#fff;color:var(--text)}[data-theme="light"] .header{border-bottom-color:#ededee}[data-theme="light"] .side .primary{background:#ebebee!important;border-color:#dedee2!important}[data-theme="light"] .brand .logo{background:#252526;color:#fff}[data-theme="light"] .searchChats{background:#eeeef0}[data-theme="light"] .chatItem.active{background:#e5e5e9}[data-theme="light"] .user .bubble{background:#eeeeef}[data-theme="light"] .inputWrap{background:#f4f4f5;border-color:#dedee1}[data-theme="light"] .send{background:#242427;color:white}[data-theme="light"] .prompt{background:#fafafa;border-color:#e1e1e4}[data-theme="light"] .prompt:hover{background:#eee}[data-theme="light"] .tools .toggleOn{background:#f1f1f2;color:#242424;border-color:#ddd}[data-theme="light"] .modeBar button.selected,[data-theme="light"] .modePicker button.selected,[data-theme="light"] .replySizer button.selected{background:#ece8f5;color:#49375c;border-color:#c9beda}[data-theme="light"] .hotelOfferText,[data-theme="light"] .hotelProfile p,[data-theme="light"] .smallNote,[data-theme="light"] .songStudio .songFacts{color:#565963}[data-theme="light"] .messageActions button:hover{background:#eaeaec}
+@media(max-width:760px){.side{width:min(84vw,290px)}.header{padding:9px 10px}.header .tools button{font-size:12px}.messages{padding:22px 15px 35px}.composer{padding:8px 11px calc(8px + env(safe-area-inset-bottom))}.hint{display:none}.voiceControls{overflow-x:auto;flex-wrap:nowrap}.voiceControls button{white-space:nowrap}.prompts{grid-template-columns:1fr}.prompt{min-height:45px}.replySizer #knowledgeCount{display:none}.modeBar button{padding:7px 11px;font-size:12px}}
+@media(max-height:760px){.voiceControls{display:none}.replySizer{display:none}}
+.hideKeyboard{border:1px solid var(--stroke);background:var(--panel2);color:var(--text);border-radius:50%;width:37px;height:37px;flex:0 0 37px;font-size:26px;line-height:1;touch-action:manipulation}.hideKeyboard:active{opacity:.65}
+
+/* v19: visible progress for response preparation */
+.reasoningPanel{display:flex;flex-direction:column;gap:9px;padding:12px 14px;border:1px solid var(--stroke);border-radius:15px;background:var(--panel2);max-width:430px;white-space:normal}
+.reasoningHead{display:flex;align-items:center;gap:9px;font-weight:650;font-size:13px}
+.reasoningSpinner{width:17px;height:17px;flex:0 0 17px;border:2px solid #777780;border-top-color:var(--accent);border-radius:50%;animation:reasonSpin .8s linear infinite}
+@keyframes reasonSpin{to{transform:rotate(360deg)}}
+.reasoningSteps{display:grid;gap:6px;font-size:12px;color:var(--muted)}
+.reasoningStep{display:flex;gap:7px;align-items:center;opacity:.5;transition:opacity .2s}
+.reasoningStep.done{opacity:1;color:var(--text)}.reasoningStep.active{opacity:1;color:var(--accent)}
+.reasoningStep .dot{width:7px;height:7px;border-radius:50%;background:currentColor;flex-shrink:0}
+@media(prefers-reduced-motion:reduce){.reasoningSpinner{animation:none}.reasoningStep{transition:none}}
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="veil" id="veil"></div>
+  <aside class="side">
+    <div class="brand"><div class="logo">✦</div>Abyshka.ai <span class="brandTag">23 PWA</span></div>
+    <button class="primary" id="newChat">＋ Новый чат</button>
+    <input id="searchChats" class="searchChats" type="search" placeholder="⌕ Поиск по перепискам" aria-label="Поиск по перепискам">
+    <div class="chats" id="chats"></div>
+    <div class="sidebarActions"><button id="exportChats" title="Скачать историю">⇩ Экспорт</button><button id="themeToggle" title="Переключить тему">☀ Тема</button></div><button id="settingsSide">⚙ Настройки модели</button>
+    <div class="sideFoot">Abyshka.ai v22 • творческая студия<br>Переписка хранится на этом устройстве. При нехватке места старые изображения могут не сохраниться.<br>Есть офлайн-ответы, планировщик поездок и генератор рисунков и музыки.</div>
+  </aside>
+  <main class="main">
+    <header class="header">
+      <div style="display:flex;align-items:center;gap:10px;min-width:0">
+        <button class="mobileOnly" id="mobileMenu">☰</button>
+        <div style="min-width:0">
+          <strong>✦ Abyshka.ai</strong>
+          <div class="status" id="status">Офлайн-режим • База знаний+</div>
+        </div>
+      </div>
+      <div class="tools">
+        <button id="thinkToggle" class="toggleOn" title="Режим размышления">🧠 Раздумье</button>
+        <button id="clear" title="Очистить этот чат">🗑</button>
+        <button id="settingsTop" title="Настройки">⚙</button>
+      </div>
+    </header>
+    <section class="messages" id="messages" aria-live="polite"></section>
+    <div class="composer">
+      <div class="modeBar" aria-label="Режим работы">
+        <button id="chatMode" class="selected" type="button">💬 Вопросы</button>
+        <button id="imageMode" type="button">🎨 Рисунки</button>
+        <button id="tripMode" type="button">🧳 Поездки</button><button id="songMode" type="button">🎵 Песни</button><button id="photoMode" type="button">📷 Фото</button>
+      </div>
+      <div class="modePicker"><button id="thinkHarder" type="button" aria-pressed="false">🧠 Думать усерднее: выкл.</button></div>
+       <div id="tripPanel"><div class="tripFields">
+<label>Город / направление<input id="tripDestination" placeholder="Париж"></label>
+<label>Звёзды отеля<select id="hotelStars"><option value="0">Любая категория</option><option value="3">3 ★ и выше</option><option value="4">4 ★ и выше</option><option value="5">5 ★</option></select></label>
+<label>Заезд<input type="date" id="hotelCheckin"></label><label>Выезд<input type="date" id="hotelCheckout"></label>
+<label>Гостей<input id="hotelGuests" type="number" min="1" max="12" value="2"></label>
+<label>Бюджет за ночь<select id="hotelBudget"><option value="">Любой бюджет</option><option value="budget">Экономный</option><option value="mid">Средний</option><option value="luxury">Премиум</option></select></label>
+</div><p class="smallNote">Поиск открывает гостиницы на внешних сайтах; цены, звёзды и наличие проверяй там. Даты и фильтры передаются там, где это поддерживается.</p></div>
+<div id="photoPanel"><label>Загрузи фото</label><input id="photoUpload" type="file" accept="image/*"><img id="photoPreview" class="photoPreview" alt="Предпросмотр" style="display:none"><div id="photoSliders" style="display:none"><label>Яркость <span id="brightnessVal">100</span>%</label><input id="brightness" type="range" min="40" max="175" value="100"><label>Контраст <span id="contrastVal">100</span>%</label><input id="contrast" type="range" min="50" max="175" value="100"><label>Насыщенность <span id="saturationVal">100</span>%</label><input id="saturation" type="range" min="0" max="200" value="100"><label>Размытие <span id="blurVal">0</span> px</label><input id="blur" type="range" min="0" max="9" value="0"><div class="photoBtns"><button id="rotatePhoto" type="button">⟳ Повернуть</button><button id="resetPhoto" type="button">Сбросить</button><button id="savePhoto" type="button">⬇ Сохранить фото</button></div></div><p class="smallNote">Фильтры и поворот работают без интернета. Если настроен API редактирования, можно также описать изменения словами и отправить фото модели.</p></div>
+       <div class="replySizer"><span>Ответы:</span><button type="button" id="shortReply">Коротко</button><button type="button" id="fullReply" class="selected">📖 Подробно</button><span id="knowledgeCount"></span></div><div id="composerHint" class="composerHint">Больше ответов на вопросы о здоровье, играх и учёбе. Офлайн-справочник не заменяет полноценную нейросеть.</div>
+      <div class="inputWrap">
+        <textarea id="input" rows="1" placeholder="Спроси Abyshka.ai о чём угодно…"></textarea>
+        <button type="button" id="hideKeyboard" class="hideKeyboard" aria-label="Скрыть клавиатуру" title="Скрыть клавиатуру">⌄</button>
+        <button class="send" id="send" aria-label="Отправить">↑</button>
+      </div>
+      <div class="voiceControls"><button id="voiceToggle" type="button">🔊 Озвучивать ответы: выкл.</button><select id="voiceSelect" aria-label="Голос Abyshka.ai"><option value="">Голос устройства (авто)</option></select><button id="voiceStop" type="button">■ Тихо</button></div>
+       <div class="hint">Без интернета доступны встроенные знания, красивые рисунки и планировщик поездок. Для сложных и актуальных данных можно подключить внешнюю модель через ⚙.</div>
+    </div>
+  </main>
+</div>
+
+<dialog id="settings">
+  <div class="modal">
+    <h2>⚙ Мозг Abyshka.ai</h2>
+    <p>Приложение работает офлайн сразу после открытия. Для более сильных ответов можно подключить совместимый API.</p>
+    <label for="webMode">Интернет-справочник</label><select id="webMode"><option value="auto">Автоматически искать справочные сведения</option><option value="off">Только офлайн</option></select><p>Поиск использует открытую Википедию, если браузер разрешает соединение. Это не чтение вкладок Safari и не универсальный поиск по всему интернету.</p><label for="mode">Режим</label>
+    <select id="mode">
+      <option value="offline">Встроенный офлайн</option>
+      <option value="api">Подключить модель через API</option>
+    </select>
+    <div id="apiOptions">
+      <label for="endpoint">Адрес API</label>
+      <input id="endpoint" type="url" placeholder="https://api.openai.com/v1/chat/completions">
+      <label for="model">Имя модели</label>
+      <input id="model" placeholder="например, gpt-4.1-mini">
+      <label for="imageProvider">Реалистичные изображения</label><select id="imageProvider"><option value="local">Локальные иллюстрации (офлайн)</option><option value="api">Сервис изображений (через API)</option></select><label for="imageEndpoint">API генерации фото (совместимый images/generations)</label><input id="imageEndpoint" type="url" placeholder="https://api.openai.com/v1/images/generations"><label for="imageEditEndpoint">API редактирования фото (совместимый images/edits)</label><input id="imageEditEndpoint" type="url" placeholder="https://api.openai.com/v1/images/edits"><label for="imageModel">Модель изображений</label><input id="imageModel" placeholder="Например, gpt-image-1"><label for="apiKey">API-ключ (не сохраняется)</label>
+      <input id="apiKey" type="password" autocomplete="off" placeholder="вставь ключ на время этой сессии">
+      <p>⚠️ В браузерной демо-версии ключ используется напрямую в запросе. Для публичного сайта нужен свой защищённый сервер.</p>
+    </div>
+    <div class="actions">
+      <button id="cancelSettings">Отмена</button>
+      <button class="primary" id="saveSettings">Сохранить</button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+const STORAGE='abyshka.ai.v3.chats';
+const CONFIG='abyshka.ai.v3.config';
+ const THEME_KEY='abyshka.ai.theme';
+let chats=[];
+let active='';
+let busy=false;
+let apiKey='';
+let composerMode='chat';
+let config={mode:'offline',endpoint:'https://api.openai.com/v1/chat/completions',model:'gpt-4.1-mini',think:true,thinkingLevel:'medium',answerSize:'full',imageProvider:'local',imageEndpoint:'https://api.openai.com/v1/images/generations',imageEditEndpoint:'https://api.openai.com/v1/images/edits',imageModel:'gpt-image-1',voiceEnabled:false,voiceURI:'',webMode:'auto'};
+
+try{
+  const stored=JSON.parse(localStorage.getItem(STORAGE)||'[]');
+  if(Array.isArray(stored)) chats=stored.filter(c=>c&&typeof c.id==='string'&&Array.isArray(c.messages)).map(c=>({...c,messages:c.messages.slice(-40)}));
+  const cfg=JSON.parse(localStorage.getItem(CONFIG)||'null');
+  if(cfg&&typeof cfg==='object') config={...config,...cfg};
+   config.think=Boolean(config.think);config.thinkingLevel=config.think?'deep':'fast';
+}catch{}
+
+function uid(){return Math.random().toString(36).slice(2)+Date.now()}
+const MAX_MESSAGES=40;
+function pruneChat(c){if(c&&Array.isArray(c.messages)&&c.messages.length>MAX_MESSAGES)c.messages.splice(0,c.messages.length-MAX_MESSAGES)}
+let storageWarned=false;
+function save(){
+ for(const c of chats)pruneChat(c);
+ try{localStorage.setItem(STORAGE,JSON.stringify(chats));storageWarned=false}
+ catch(e){
+  // Large generated images can exceed browser storage quotas. Keep messages in memory.
+  console.warn('Не удалось сохранить историю',e);
+  // Вторая попытка: изображения остаются на экране, но в хранилище сохраняется облегчённая история.
+  try{const lean=chats.map(c=>({...c,messages:c.messages.map(m=>m.image&&m.image.startsWith('data:')?{...m,image:null,content:(m.content||'')+' [Изображение не сохранено из-за лимита памяти]'}:m)}));localStorage.setItem(STORAGE,JSON.stringify(lean));storageWarned=false;return}catch(e2){}
+  if(!storageWarned){storageWarned=true;setTimeout(()=>alert('Память браузера заполнена. Переписка работает, но новые данные могут не сохраниться после закрытия вкладки. Скачай историю через «Экспорт». '),0)}
+ }
+}
+function saveConfig(){try{localStorage.setItem(CONFIG,JSON.stringify({...config,think:!!config.think}))}catch(e){console.warn('Настройки не сохранились',e)}}
+function ensureChat(){if(!chats.length){chats=[{id:uid(),title:'Новый чат',messages:[]}];active=chats[0].id;save()} if(!active||!chats.some(c=>c.id===active)) active=chats[0].id}
+function current(){ensureChat();return chats.find(c=>c.id===active)||chats[0]}
+function newChat(){const c={id:uid(),title:'Новый чат',messages:[]};chats.unshift(c);active=c.id;save();render();document.body.classList.remove('sideOpen');$('input').focus()}
+ensureChat();
+
+function wait(ms){return new Promise(r=>setTimeout(r,ms))}
+function escapeHtml(s){return String(s).replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]))}
+
+let chatFilter='';
+function renderChats(){
+  const box=$('chats');
+  box.replaceChildren();
+  for(const c of chats){
+    const d=document.createElement('div');
+    d.className='chatItem'+(c.id===active?' active':'');
+    d.textContent='◌ '+(c.title||'Новый чат');
+     d.title=c.title||'Новый чат';
+     if(chatFilter && !(c.title+' '+c.messages.map(m=>m.content||'').join(' ')).toLowerCase().includes(chatFilter))continue;
+    d.onclick=()=>{active=c.id;render();document.body.classList.remove('sideOpen')};
+    box.append(d);
+  }
+}
+
+function renderStatus(){
+  const base=config.mode==='api' ? ('API: '+(config.model||'модель')) : (config.webMode==='off'?'Офлайн':'Офлайн + веб-справочник');
+  $('status').textContent=base+' • '+(config.think?'думает усерднее':'обычный режим');
+  $('thinkToggle').classList.toggle('toggleOn',!!config.think);
+  $('thinkToggle').textContent='🧠 '+(config.think?'Усерднее: вкл.':'Обычное размышление');
+  $('thinkHarder').classList.toggle('selected',!!config.think);
+  $('thinkHarder').setAttribute('aria-pressed',String(!!config.think));
+  $('thinkHarder').textContent='🧠 Думать усерднее: '+(config.think?'вкл.':'выкл.');
+  $('shortReply').classList.toggle('selected',config.answerSize==='short');
+  $('fullReply').classList.toggle('selected',config.answerSize!=='short');
+  $('knowledgeCount').textContent=KNOWLEDGE.length+' тем офлайн';
+}
+
+function availableVoices(){return 'speechSynthesis' in window?window.speechSynthesis.getVoices():[]}
+function updateVoices(){
+ const sel=$('voiceSelect');if(!sel)return;
+ const list=availableVoices();sel.replaceChildren();
+ const opt=document.createElement('option');opt.value='';opt.textContent='Авто · русский голос';sel.append(opt);
+ list.sort((a,b)=>(b.lang.startsWith('ru')?1:0)-(a.lang.startsWith('ru')?1:0)).forEach(v=>{const o=document.createElement('option');o.value=v.voiceURI;o.textContent=v.name+' ('+v.lang+')';sel.append(o)});
+ sel.value=config.voiceURI||'';
+}
+function speakText(text,rate=1){
+ if(!('speechSynthesis' in window)){alert('На этом устройстве синтез речи недоступен.');return}
+ window.speechSynthesis.cancel();
+ const msg=new SpeechSynthesisUtterance(String(text).slice(0,4000));msg.lang='ru-RU';msg.rate=rate;msg.pitch=1.07;
+ const voices=availableVoices();msg.voice=voices.find(v=>v.voiceURI===config.voiceURI)||voices.find(v=>v.lang.toLowerCase().startsWith('ru'))||null;
+ window.speechSynthesis.speak(msg);
+}
+function readLyrics(song){
+ const text=song.lyrics.replace(/^(Куплет ?\d*|Припев|Финальный припев)\s*$/gmi,'').trim();
+ speakText(text,Math.min(1.2,Math.max(.8,song.bpm/105)));
+}
+function renderHotelOptions(h){
+
+         const section=document.createElement('div');section.className='tripDay';
+         const heading=document.createElement('strong');heading.textContent='🏨 Поиск отелей · '+h.destination;section.append(heading);
+         const detail=document.createElement('div');detail.className='smallNote';detail.textContent='Категория: '+(h.stars?('от '+h.stars+' ★'):'любая')+' · гостей: '+h.guests+' · бюджет: '+h.budgetLabel+(h.checkin&&h.checkout?' · '+h.checkin+' — '+h.checkout:'');section.append(detail);
+         const urls=hotelSearchLinks(h);
+         for(const item of urls){const a=document.createElement('a');a.className='hotelLink';a.href=item.url;a.target='_blank';a.rel='noopener noreferrer';a.textContent=item.label;section.append(a)}
+         const notice=document.createElement('div');notice.className='smallNote';notice.textContent='Это ссылки для самостоятельного поиска. Abyshka не получила список актуальных отелей, рейтинги, цены или свободные номера. На сайтах поиска уточни звёздность, даты и стоимость.';section.append(notice);
+         const {profiles,recommended}=hotelCategories(h);
+         const header=document.createElement('strong');header.textContent='🏨 Варианты проживания с картинками';section.append(header);
+         const explanation=document.createElement('div');explanation.className='hotelOfferNote';explanation.textContent='Это иллюстрированные примеры категорий, а не реальные объявления гостиниц. Фото, точные цены, отзывы и свободные номера требуют онлайн-поиска.';section.append(explanation);
+         const offers=document.createElement('div');offers.className='hotelCards';
+         profiles.forEach(profile=>{
+           const box=document.createElement('article');box.className='hotelOffer'+(profile.stars===(h.selectedStars||recommended)?' recommended':'');
+           const pic=document.createElement('img');pic.className='hotelPicture';pic.src=hotelIllustration(profile.stars);pic.alt='Иллюстрация отеля категории '+profile.stars+' звезды';pic.loading='lazy';box.append(pic);
+           const body=document.createElement('div');body.className='hotelOfferBody';
+           const title=document.createElement('div');title.className='hotelOfferTitle';title.textContent=profile.name;body.append(title);
+           const stars=document.createElement('div');stars.className='hotelOfferRating';stars.textContent='★'.repeat(profile.stars)+'☆'.repeat(5-profile.stars)+(profile.stars===(h.selectedStars||recommended)?' · Рекомендуем':'');body.append(stars);
+           const desc=document.createElement('div');desc.className='hotelOfferText';desc.textContent=profile.desc+' '+profile.best;body.append(desc);
+           const buttons=document.createElement('div');buttons.className='hotelOfferButtons';
+           const choose=document.createElement('button');choose.type='button';choose.textContent=h.selectedStars===profile.stars?'✓ Выбрано':'Выбрать';choose.onclick=()=>{h.selectedStars=profile.stars;save();render();};buttons.append(choose);
+           const search=document.createElement('a');search.textContent='🔍 Найти похожие';search.href='https://www.google.com/travel/hotels?q='+encodeURIComponent(h.destination+' отели '+profile.stars+' звезды');search.target='_blank';search.rel='noopener noreferrer';buttons.append(search);
+           body.append(buttons);box.append(body);offers.append(box);
+         });
+         section.append(offers);
+         const opinion=document.createElement('div');opinion.className='smallNote';opinion.textContent=hotelAdvice(h);section.append(opinion);
+         const ask=document.createElement('button');ask.className='tripSuggest';ask.textContent='💬 Спроси: какой отель мне выбрать?';ask.onclick=()=>{setMode('trip');$('input').value='Какой отель мне выбрать и почему?';send()};section.append(ask);
+
+  return section;
+}
+
+function msgNode(m){
+  const wrap=document.createElement('div');
+  wrap.className='msg '+(m.role==='user'?'user':'assistant');
+  const av=document.createElement('div');
+  av.className='avatar';
+  av.textContent=m.role==='user'?'Ты':'AI';
+  const bubble=document.createElement('div');
+  bubble.className='bubble';
+  if(m.pending){
+    const panel=document.createElement('div');panel.className='reasoningPanel';
+    const head=document.createElement('div');head.className='reasoningHead';
+    const spin=document.createElement('span');spin.className='reasoningSpinner';
+    const label=document.createElement('span');label.textContent=m.stageLabel||'Подготавливаю ответ…';head.append(spin,label);panel.append(head);
+    const steps=document.createElement('div');steps.className='reasoningSteps';
+    const names=['Понимаю вопрос','Проверяю подходящие знания','Формулирую ответ'];
+    names.forEach((name,i)=>{const item=document.createElement('div');item.className='reasoningStep'+(i<(m.stage||0)?' done':i===(m.stage||0)?' active':'');const dot=document.createElement('span');dot.className='dot';const t=document.createElement('span');t.textContent=(i<(m.stage||0)?'✓ ':'')+name;item.append(dot,t);steps.append(item)});
+    if(m.showStages!==false)panel.append(steps);bubble.append(panel);
+  }else{
+    const txt=document.createElement('div');
+    txt.textContent=m.content||'';
+    bubble.append(txt);
+
+    if(m.image){
+      const card=document.createElement('div');
+      card.className='card';
+      const img=document.createElement('img');
+      img.className='artImage';
+      img.src=m.image;
+      img.alt='Сгенерированный офлайн рисунок';
+      card.append(img);
+      const meta=document.createElement('div');
+      meta.className='meta';
+      meta.textContent='Промпт: '+(m.prompt||'');
+      card.append(meta);
+      const actions=document.createElement('div');
+      actions.className='actions';
+      const a=document.createElement('a');
+      a.href=m.image; a.download='abyshka-art.jpg'; a.textContent='💾 Сохранить';
+      const b=document.createElement('button');
+      b.textContent='🔁 Повторить';
+      b.onclick=()=>{setMode('image');$('input').value=m.prompt||'';$('input').focus()};
+      actions.append(a,b);
+      card.append(actions);
+      bubble.append(card);
+    }
+    if(m.song){
+      const card=document.createElement('div');card.className='songStudio';
+      const title=document.createElement('h3');title.textContent='🎵 '+m.song.title;card.append(title);
+      const facts=document.createElement('div');facts.className='songFacts';facts.textContent=m.song.style+' • '+m.song.bpm+' BPM • '+m.song.duration+' сек • '+(m.song.version>1?'Аранжировка '+m.song.version:'Первая версия');card.append(facts);
+      const wave=document.createElement('div');wave.className='wave';
+      for(let i=0;i<48;i++){const sp=document.createElement('span');sp.style.height=(7+((i*37+m.song.seed)%24))+'px';wave.append(sp)}card.append(wave);
+      const label=document.createElement('div');label.className='songFacts';label.textContent='Оригинальный текст песни:';card.append(label);
+      const lyrics=document.createElement('pre');lyrics.textContent=m.song.lyrics;card.append(lyrics);
+      const controls=document.createElement('div');controls.className='controls';
+      const play=document.createElement('button');play.textContent='▶ Прослушать';play.onclick=()=>playSong(m.song,play);
+      const stop=document.createElement('button');stop.textContent='■ Стоп';stop.onclick=stopSong;
+      const improve=document.createElement('button');improve.textContent='✨ Улучшить';improve.onclick=()=>{stopSong();m.song=improveSong(m.song);save();render()};
+      const saveSongBtn=document.createElement('button');saveSongBtn.textContent='⬇ WAV';saveSongBtn.onclick=()=>downloadSong(m.song,saveSongBtn);
+      const voice=document.createElement('button');voice.textContent='🎤 Голос + музыка';voice.onclick=()=>{playSong(m.song,play);setTimeout(()=>readLyrics(m.song),700)};
+       const justVoice=document.createElement('button');justVoice.textContent='🗣 Прочитать слова';justVoice.onclick=()=>readLyrics(m.song);
+       controls.append(play,voice,justVoice,stop,improve,saveSongBtn);card.append(controls);
+      const note=document.createElement('div');note.className='songFacts';note.textContent='🎤 Режим голос + музыка: устройство ритмично озвучивает оригинальный текст поверх музыки. Это озвучка, не настоящее пение. WAV содержит инструментал; для полноценной песни с вокалом нужна музыкальная ИИ-модель.';card.append(note);
+      bubble.append(card);
+    }
+    if(m.hotelOptions){
+      const hotelWrap=document.createElement('div');hotelWrap.className='card hotelAdviceCard';
+      hotelWrap.append(renderHotelOptions(m.hotelOptions));
+      bubble.append(hotelWrap);
+    }
+    if(m.trip){
+      const card=document.createElement('div');
+      card.className='card tripBox';
+      const meta=document.createElement('div');
+      meta.className='meta';
+      meta.textContent=m.trip.meta;
+      card.append(meta);
+
+      const pills=document.createElement('div');
+      pills.className='pillRow';
+      m.trip.tags.forEach(tag=>{const p=document.createElement('span');p.className='pill';p.textContent=tag;pills.append(p)});
+      card.append(pills);
+
+      const prep=document.createElement('div');
+      prep.className='tripDay';
+      prep.innerHTML='<strong>Перед поездкой</strong><ul class="tripList">'+m.trip.prep.map(x=>'<li>'+escapeHtml(x)+'</li>').join('')+'</ul>';
+      card.append(prep);
+
+      m.trip.days.forEach(day=>{
+        const d=document.createElement('div');
+        d.className='tripDay';
+        d.innerHTML='<strong>'+escapeHtml(day.title)+'</strong><ul class="tripList">'+day.items.map(x=>'<li>'+escapeHtml(x)+'</li>').join('')+'</ul>';
+        card.append(d);
+      });
+
+      const pack=document.createElement('div');
+      pack.className='tripDay';
+      pack.innerHTML='<strong>Что взять с собой</strong><ul class="tripList">'+m.trip.pack.map(x=>'<li>'+escapeHtml(x)+'</li>').join('')+'</ul>';
+      card.append(pack);
+
+      const budget=document.createElement('div');
+      budget.className='budgetGrid';
+      m.trip.budget.forEach(x=>{
+        const item=document.createElement('div');
+        item.className='budgetItem';
+        item.innerHTML='<b>'+escapeHtml(x.name)+'</b><span>'+escapeHtml(x.value)+'</span>';
+        budget.append(item);
+      });
+      card.append(budget);
+       if(m.trip.hotel){card.append(renderHotelOptions(m.trip.hotel));}
+
+      const note=document.createElement('div');
+      note.className='meta';
+      note.textContent='Офлайн-планировщик: не проверяет погоду, билеты и реальные цены в интернете.';
+      card.append(note);
+
+      const actions=document.createElement('div');
+      actions.className='actions';
+      const b=document.createElement('button');
+      b.textContent='🧳 Новый маршрут';
+      b.onclick=()=>{setMode('trip');$('input').focus()};
+      actions.append(b);
+      card.append(actions);
+      bubble.append(card);
+    }
+  }
+  if(!m.pending){
+    const bar=document.createElement('div');bar.className='messageActions';
+    const action=(label,title,fn)=>{const btn=document.createElement('button');btn.type='button';btn.textContent=label;btn.title=title;btn.setAttribute('aria-label',title);btn.onclick=fn;bar.append(btn)};
+    action('⧉','Копировать сообщение',async()=>{try{await navigator.clipboard.writeText(m.content||'')}catch{const t=document.createElement('textarea');t.value=m.content||'';document.body.append(t);t.select();document.execCommand('copy');t.remove()}});
+    if(m.role==='user') action('✎','Изменить сообщение',()=>{setMode(m.mode||'chat');$('input').value=m.content||'';$('input').dispatchEvent(new Event('input'));$('input').focus()});
+    else {
+      action('↻','Повторить ответ',()=>retryMessage(m));
+      action('🔊','Озвучить',()=>speakText(m.content||''));
+    }
+    bubble.append(bar);
+  }
+  wrap.append(av,bubble);
+  return wrap;
+}
+
+function retryMessage(m){
+  if(busy)return;
+  const c=current(),idx=c.messages.indexOf(m);
+  if(idx<1)return;
+  let userIdx=idx-1;
+  while(userIdx>=0&&c.messages[userIdx].role!=='user')userIdx--;
+  if(userIdx<0)return;
+  const original=c.messages[userIdx];
+  if(idx!==c.messages.length-1){$('input').value=original.content;setMode(original.mode||'chat');$('input').focus();return}
+  c.messages.splice(userIdx);save();setMode(original.mode||'chat');$('input').value=original.content;send();
+}
+function welcomeNode(){
+  const w=document.createElement('div');
+  w.className='welcome';
+  w.innerHTML='<div class="logo" style="width:70px;height:70px;font-size:40px">✦</div><h1>С чего начнём?</h1><p>Общайся, создавай изображения и песни, планируй поездки. Для ответов уровня большой нейросети подключи модель через настройки.</p><div class="prompts"></div>';
+  const prompts=[
+    {mode:'chat',text:'Объясни простыми словами, что такое нейросеть'},
+    {mode:'image',text:'Нарисуй красивого кота ночью у домика'},
+    {mode:'trip',text:'Поездка в Париж на 3 дня, люблю музеи и вкусную еду'},
+    {mode:'chat',text:'Придумай идею для хоррор-игры'},
+    {mode:'image',text:'Космический робот на фоне звездного неба'},
+    {mode:'trip',text:'Поездка в Финляндию на выходные на машине'},
+    {mode:'song',text:'Красивая и спокойная песня о звёздах, мечтах и ночном небе'}
+  ];
+  const box=w.querySelector('.prompts');
+  for(const p of prompts){
+    const b=document.createElement('button');
+    b.className='prompt';
+    b.textContent='✦ '+p.text;
+    b.onclick=()=>{setMode(p.mode);$('input').value=p.text;send()};
+    box.append(b);
+  }
+  return w;
+}
+
+function render(scrollBottom=false){
+  ensureChat();
+  const old=$('messages');const oldTop=old.scrollTop;const wasAtBottom=old.scrollHeight-old.clientHeight-old.scrollTop<70;
+  renderChats();
+  renderStatus();
+  const list=$('messages');
+  list.replaceChildren();
+  const c=current();
+  if(!c.messages.length){
+    list.append(welcomeNode());
+  }else{
+    c.messages.forEach(m=>list.append(msgNode(m)));
+  }
+  list.dataset.followBottom=(scrollBottom||wasAtBottom)?'1':'0';
+  const adjust=()=>{if(!list.isConnected)return;list.scrollTop=(scrollBottom||wasAtBottom)?list.scrollHeight:oldTop};
+  adjust();
+  if(scrollBottom){requestAnimationFrame(()=>{list.scrollTop=list.scrollHeight;requestAnimationFrame(()=>{list.scrollTop=list.scrollHeight})});}
+}
+
+function setMode(mode){
+  composerMode=mode;
+  $('chatMode').classList.toggle('selected',mode==='chat');
+  $('imageMode').classList.toggle('selected',mode==='image');
+  $('tripMode').classList.toggle('selected',mode==='trip');
+  $('songMode').classList.toggle('selected',mode==='song');
+  $('photoMode').classList.toggle('selected',mode==='photo');
+  $('photoPanel').style.display=mode==='photo'?'block':'none';$('tripPanel').style.display=mode==='trip'?'block':'none';
+  const hintMap={
+    chat:'Больше ответов на вопросы о здоровье, играх и учёбе. Офлайн-справочник не заменяет полноценную нейросеть.',
+    image:'Бесплатные красивые рисунки без интернета. Лучше писать подробно: настроение, фон, время суток, стиль.',
+    trip:'Выбери город, даты, бюджет и звёзды. Abyshka покажет иллюстрированные варианты категорий и даст ссылки на настоящие отели.',
+    song:'🎵 Аранжировка + голосовая озвучка слов поверх музыки. Для настоящего певческого вокала потребуется отдельная модель.',
+    photo:'📷 Выбери фотографию выше, настрой свет и цвет. Для ИИ-редактирования подключи API и напиши изменения в поле ввода.',
+  };
+  $('composerHint').textContent=hintMap[mode];
+  $('input').placeholder=mode==='image' ? 'Например: красивый робот в неоновом городе ночью…' : mode==='trip' ? 'Например: поездка в Берлин на 3 дня, люблю музеи…' : mode==='song' ? 'Напиши слова или идею песни, её стиль и настроение…' : mode==='photo' ? 'Для ИИ-редактирования: например, замени фон на зимний лес…' : 'Спроси Abyshka.ai о чём угодно…';
+  $('input').focus();
+}
+
+function safeArithmetic(expr){
+ const tokens=expr.match(/\d+(?:\.\d+)?|[()+\-*/]/g)||[];
+ if(tokens.join('')!==expr.replace(/\s+/g,''))throw Error('Некорректное выражение');
+ let i=0;
+ function atom(){const t=tokens[i++];if(t==='+'||t==='-'){const v=atom();return t==='-'?-v:v}if(t==='('){const v=sum();if(tokens[i++]!==')')throw Error('Скобки');return v}if(!t||!/^\d/.test(t))throw Error('Число');return Number(t)}
+ function product(){let v=atom();while(tokens[i]==='*'||tokens[i]==='/'){const op=tokens[i++],b=atom();v=op==='*'?v*b:v/b}return v}
+ function sum(){let v=product();while(tokens[i]==='+'||tokens[i]==='-'){const op=tokens[i++],b=product();v=op==='+'?v+b:v-b}return v}
+ const result=sum();if(i!==tokens.length||!Number.isFinite(result))throw Error('Выражение');return result;
+}
+function calculate(text){
+ // Арифметику решаем только при явном математическом выражении, а не по случайным цифрам в вопросе.
+ const raw=String(text).trim().replace(/^(?:посчитай|вычисли|сколько будет|чему равно|реши пример|пример)\s*[:：]?\s*/i,'').replace(/[?=]\s*$/,'').trim();
+ if(!/^[0-9\s.,()+\-*/]+$/.test(raw) || !/[+*/-]/.test(raw) || !/\d\s*[+*/-]\s*\d/.test(raw))return '';
+ const expr=raw.replace(/,/g,'.');
+ if(expr.length>100)return '';
+ try{const val=Function('"use strict";return ('+expr+')')();if(Number.isFinite(val))return 'Ответ: '+String(Math.round((val+Number.EPSILON)*1e6)/1e6)}catch{}
+ return '';
+}
+
+// Abyshka v4 — расширенный локальный справочник и тематический поиск.
+const KNOWLEDGE = [{"topic": "Математика", "keys": ["дроби", "дробь", "числитель", "знаменатель"], "answer": "Дробь обозначает часть целого. Числитель показывает, сколько частей взято, знаменатель — на сколько равных частей разделили целое.", "example": "Например, 3/4 означает три из четырёх равных частей. Для сложения дробей сначала приводят их к общему знаменателю."}, {"topic": "Математика", "keys": ["проценты", "процент", "доля", "скидка"], "answer": "Процент — это одна сотая целого. Чтобы найти p% от числа a, вычисли a × p / 100.", "example": "20% от 250 = 250 × 20 / 100 = 50. Скидка 20% уменьшит цену 250 до 200."}, {"topic": "Математика", "keys": ["уравнение", "решить уравнение", "икс", "x", "алгебра"], "answer": "Уравнение — равенство с неизвестным. Нужно выполнить равносильные действия с обеими сторонами и найти неизвестное.", "example": "Если 3x + 5 = 20, то 3x = 15, x = 5. Проверка: 3 × 5 + 5 = 20."}, {"topic": "Математика", "keys": ["степень", "показатель", "квадрат", "куб"], "answer": "Степень обозначает многократное умножение числа само на себя.", "example": "2³ = 2 × 2 × 2 = 8. Важно: (−2)² = 4, а −2² = −4."}, {"topic": "Математика", "keys": ["корень", "квадратный", "извлечение"], "answer": "Квадратный корень числа a — неотрицательное число, квадрат которого равен a.", "example": "√49 = 7, потому что 7 × 7 = 49."}, {"topic": "Математика", "keys": ["площадь", "прямоугольник"], "answer": "Площадь прямоугольника равна длине, умноженной на ширину.", "example": "При сторонах 6 см и 4 см площадь равна 24 см²."}, {"topic": "Математика", "keys": ["площадь", "круг", "окружность", "радиус"], "answer": "Площадь круга S = πr². Длина окружности C = 2πr, где r — радиус.", "example": "Если радиус 3 см, площадь приблизительно 28,27 см², а длина окружности около 18,85 см."}, {"topic": "Математика", "keys": ["пифагор", "треугольник", "гипотенуза", "катет"], "answer": "Теорема Пифагора: в прямоугольном треугольнике сумма квадратов катетов равна квадрату гипотенузы.", "example": "Если катеты 3 и 4, гипотенуза √(9+16)=5."}, {"topic": "Математика", "keys": ["вероятность", "случайное", "событие", "шанс"], "answer": "Вероятность — мера того, насколько событие возможно. Для равновероятных исходов это число подходящих исходов, делённое на число всех исходов.", "example": "Для честной игральной кости вероятность выпадения шестёрки равна 1/6."}, {"topic": "Математика", "keys": ["среднее", "арифметическое"], "answer": "Среднее арифметическое получают, сложив значения и разделив сумму на их количество.", "example": "Для 3, 7 и 8 среднее = 18/3 = 6."}, {"topic": "Математика", "keys": ["пропорция", "отношение", "масштаб"], "answer": "Пропорция — равенство двух отношений. При масштабе 1:100 реальный размер в 100 раз больше размера на чертеже.", "example": "5 см на плане 1:100 соответствуют 500 см, то есть 5 м."}, {"topic": "Физика", "keys": ["сила", "ньютона", "ускорение", "масса"], "answer": "Второй закон Ньютона: F = ma. Сила равна массе, умноженной на ускорение.", "example": "При массе 2 кг и ускорении 3 м/с² сила равна 6 Н."}, {"topic": "Физика", "keys": ["энергия", "кинетическая", "потенциальная", "сохранения"], "answer": "Энергия характеризует способность совершать работу. В изолированной системе полная энергия сохраняется, хотя может менять форму.", "example": "Поднятый мяч обладает гравитационной потенциальной энергией; при падении часть её переходит в кинетическую."}, {"topic": "Физика", "keys": ["скорость", "расстояние", "время", "путь"], "answer": "Средняя скорость равна пройденному расстоянию, делённому на время: v = s/t.", "example": "При расстоянии 120 км и времени 2 ч средняя скорость равна 60 км/ч."}, {"topic": "Физика", "keys": ["электричество", "ток", "напряжение", "сопротивление", "ом"], "answer": "Закон Ома для участка цепи: I = U/R. Ток зависит от напряжения и сопротивления.", "example": "Если напряжение 12 В, сопротивление 4 Ом, ток равен 3 А."}, {"topic": "Физика", "keys": ["электричество", "проводник", "изолятор"], "answer": "Проводники хорошо пропускают электрический ток, изоляторы препятствуют его прохождению.", "example": "Медь — хороший проводник, сухая резина обычно изолятор. С электрическими сетями опасно экспериментировать."}, {"topic": "Физика", "keys": ["давление", "сила", "площадь"], "answer": "Давление равно силе на единицу площади: p = F/S.", "example": "Одна и та же сила создаёт большее давление на меньшей площади."}, {"topic": "Физика", "keys": ["гравитация", "притяжение", "тяжесть"], "answer": "Гравитация — взаимное притяжение тел с массой. Она определяет падение предметов и движение планет.", "example": "На Луне тяжесть меньше земной из-за меньшей массы Луны."}, {"topic": "Физика", "keys": ["свет", "скорость", "вакуум"], "answer": "Скорость света в вакууме точно равна 299 792 458 м/с.", "example": "Свет проходит примерно 300 000 км за одну секунду."}, {"topic": "Физика", "keys": ["звук", "частота", "волна"], "answer": "Звук — механическая волна, возникающая из-за колебаний среды. В вакууме звук не распространяется.", "example": "Высота тона связана с частотой колебаний, а громкость — с их амплитудой."}, {"topic": "Физика", "keys": ["температура", "тепло", "теплопередача"], "answer": "Тепло передаётся от более тёплого тела к более холодному при контакте или другими способами.", "example": "Способы передачи тепла: теплопроводность, конвекция и излучение."}, {"topic": "Химия", "keys": ["атом", "электрон", "протон", "нейтрон"], "answer": "Атом состоит из ядра с протонами и нейтронами и электронов вокруг ядра.", "example": "Число протонов определяет химический элемент. У водорода в ядре один протон."}, {"topic": "Химия", "keys": ["молекула", "вещество", "атом"], "answer": "Молекула — группа атомов, связанных между собой. Некоторые вещества состоят из отдельных молекул, другие — из кристаллических структур.", "example": "Молекула воды H₂O содержит два атома водорода и один атом кислорода."}, {"topic": "Химия", "keys": ["кислота", "щёлочь", "основание", "ph"], "answer": "pH — показатель кислотности водного раствора. В обычных условиях pH ниже 7 соответствует кислой среде, выше 7 — щелочной.", "example": "Лимонный сок кислый; раствор пищевой соды может быть слабощелочным."}, {"topic": "Химия", "keys": ["химическая", "реакция", "продукты", "реагенты"], "answer": "Химическая реакция — превращение одних веществ в другие с изменением химических связей.", "example": "В реакции образования воды водород и кислород превращаются в воду; уравнения реакций должны сохранять число атомов."}, {"topic": "Химия", "keys": ["таблица", "менделеева", "периодическая", "элементы"], "answer": "Периодическая таблица упорядочивает химические элементы по атомному номеру. Элементы в одной группе часто имеют похожие свойства.", "example": "Например, литий, натрий и калий относятся к щелочным металлам."}, {"topic": "Биология", "keys": ["клетка", "мембрана", "ядро", "органеллы"], "answer": "Клетка — основная структурная единица живых организмов. Клеточная мембрана регулирует обмен веществ с окружающей средой.", "example": "У растительных клеток часто есть клеточная стенка, хлоропласты и крупная вакуоль."}, {"topic": "Биология", "keys": ["днк", "ген", "генетика", "наследственность"], "answer": "ДНК хранит наследственную информацию. Ген — участок ДНК, связанный с созданием функционального продукта, часто белка.", "example": "Признаки организма зависят от генов и окружающей среды."}, {"topic": "Биология", "keys": ["фотосинтез", "хлорофилл", "растения"], "answer": "При фотосинтезе растения используют световую энергию, чтобы из воды и CO₂ создавать органические вещества, выделяя кислород.", "example": "Свет поглощается пигментами, включая хлорофилл, в хлоропластах."}, {"topic": "Биология", "keys": ["эволюция", "отбор", "дарвин"], "answer": "Эволюция — изменение наследственных признаков популяций во многих поколениях. Один из её механизмов — естественный отбор.", "example": "Если вариант признака помогает выживать и размножаться, со временем он может встречаться чаще."}, {"topic": "Биология", "keys": ["экосистема", "пищевая", "цепь"], "answer": "Экосистема объединяет живые организмы и среду их обитания. Пищевые цепи показывают передачу энергии между организмами.", "example": "Трава → кузнечик → лягушка → цапля — пример пищевой цепи."}, {"topic": "Биология", "keys": ["вирус", "бактерия", "различия"], "answer": "Бактерии — клеточные организмы, а вирусы размножаются внутри клеток хозяина и не имеют полноценного клеточного строения.", "example": "Антибиотики лечат некоторые бактериальные инфекции, но не действуют на вирусы."}, {"topic": "Биология", "keys": ["иммунитет", "антитела", "вакцина"], "answer": "Иммунная система распознаёт и уничтожает многие возбудители. Вакцины помогают заранее сформировать защитный иммунный ответ.", "example": "После вакцинации иммунная система обычно быстрее распознаёт соответствующий возбудитель."}, {"topic": "Биология", "keys": ["сердце", "кровообращение"], "answer": "Сердце — мышечный орган, который прокачивает кровь по сосудам.", "example": "Малый круг кровообращения связан с лёгкими, большой — с остальными органами."}, {"topic": "География", "keys": ["материки", "континенты"], "answer": "Обычно выделяют шесть материков: Евразия, Африка, Северная Америка, Южная Америка, Австралия и Антарктида.", "example": "В некоторых классификациях Европу и Азию рассматривают как отдельные континенты."}, {"topic": "География", "keys": ["океаны", "земли"], "answer": "На Земле выделяют пять океанов: Тихий, Атлантический, Индийский, Южный и Северный Ледовитый.", "example": "Тихий океан — крупнейший по площади."}, {"topic": "География", "keys": ["погода", "климат", "разница"], "answer": "Погода описывает состояние атмосферы в конкретный момент; климат — многолетние закономерности погоды в регионе.", "example": "Дождливый день — погода. Холодные зимы на протяжении десятилетий — черта климата."}, {"topic": "География", "keys": ["землетрясение", "тектонические", "плиты"], "answer": "Землетрясения часто происходят при резких смещениях горных пород вдоль разломов, связанных с движением тектонических плит.", "example": "Во время землетрясения нужно следовать местным инструкциям безопасности, избегать окон и не пользоваться лифтом."}, {"topic": "География", "keys": ["вулкан", "магма", "лава"], "answer": "Вулкан — место выхода на поверхность магмы, газов и других вулканических материалов. Магму на поверхности называют лавой.", "example": "Многие вулканы находятся на границах литосферных плит."}, {"topic": "Космос", "keys": ["солнечная", "система", "планеты"], "answer": "Солнечная система включает Солнце, восемь планет, карликовые планеты, спутники, астероиды и кометы.", "example": "Порядок планет: Меркурий, Венера, Земля, Марс, Юпитер, Сатурн, Уран, Нептун."}, {"topic": "Космос", "keys": ["чёрная", "дыра", "горизонт", "событий"], "answer": "Чёрная дыра — область пространства-времени, из которой свет не может выйти за горизонт событий.", "example": "Чёрные дыры могут образовываться после коллапса очень массивных звёзд."}, {"topic": "Космос", "keys": ["звезда", "солнце", "термоядерный", "синтез"], "answer": "Звезда светит за счёт термоядерных реакций в её недрах. Солнце — ближайшая к Земле звезда.", "example": "В ядре Солнца водород превращается в гелий с выделением энергии."}, {"topic": "Космос", "keys": ["галактика", "млечный", "путь"], "answer": "Галактика — огромная система звёзд, газа, пыли и тёмной материи, связанных гравитацией.", "example": "Наша Солнечная система находится в галактике Млечный Путь."}, {"topic": "Космос", "keys": ["луна", "фазы", "затмение"], "answer": "Фазы Луны возникают из-за изменения видимой с Земли освещённой части Луны по мере её движения вокруг Земли.", "example": "Солнечное затмение происходит, когда Луна оказывается между Землёй и Солнцем."}, {"topic": "История", "keys": ["древний", "египет", "пирамиды", "фараоны"], "answer": "Древний Египет — одна из ранних цивилизаций, возникшая вдоль Нила. Им управляли фараоны.", "example": "Пирамиды служили монументальными гробницами некоторых правителей."}, {"topic": "История", "keys": ["римская", "империя", "рим"], "answer": "Римская империя развилась из Римской республики и контролировала большие территории вокруг Средиземного моря.", "example": "Западная Римская империя традиционно считается павшей в 476 году."}, {"topic": "История", "keys": ["пётр", "первый", "реформы"], "answer": "Пётр I проводил масштабные реформы государственного управления, армии и флота России.", "example": "Санкт-Петербург был основан в 1703 году."}, {"topic": "История", "keys": ["вторая", "мировая", "война"], "answer": "Вторая мировая война продолжалась с 1939 по 1945 год и охватила многие страны мира.", "example": "В Европе война завершилась капитуляцией нацистской Германии в мае 1945 года."}, {"topic": "История", "keys": ["средние", "века", "средневековье"], "answer": "Средние века — условный исторический период между античностью и Новым временем.", "example": "В Европе его часто датируют приблизительно V–XV веками."}, {"topic": "Русский язык", "keys": ["части", "речи", "существительное", "глагол", "прилагательное"], "answer": "Части речи — классы слов с общими грамматическими признаками. Существительное называет предмет, глагол — действие, прилагательное — признак.", "example": "Пример: «Весёлый кот бежит»: «весёлый» — прилагательное, «кот» — существительное, «бежит» — глагол."}, {"topic": "Русский язык", "keys": ["корень", "приставка", "суффикс", "окончание", "морфемы"], "answer": "Слово может состоять из приставки, корня, суффикса и окончания. Корень содержит основное лексическое значение.", "example": "В слове «подводный»: под- — приставка, -вод- — корень, -н- — суффикс, -ый — окончание."}, {"topic": "Русский язык", "keys": ["подлежащее", "сказуемое", "предложение"], "answer": "Подлежащее и сказуемое — главные члены предложения.", "example": "В предложении «Птица поёт» подлежащее — «птица», сказуемое — «поёт»."}, {"topic": "Русский язык", "keys": ["однокоренные", "слова", "родственные"], "answer": "Однокоренные слова имеют общий корень и связанное значение.", "example": "«Лес», «лесной», «лесник» — однокоренные. Совпадение букв не всегда означает родство."}, {"topic": "Русский язык", "keys": ["метафора", "сравнение", "эпитет"], "answer": "Метафора переносит значение по сходству, сравнение явно сопоставляет предметы, эпитет создаёт образное определение.", "example": "«Море огней» — метафора; «белый как снег» — сравнение."}, {"topic": "Литература", "keys": ["пушкин", "евгений", "онегин"], "answer": "«Евгений Онегин» — роман в стихах Александра Сергеевича Пушкина.", "example": "В центре произведения — взаимоотношения Онегина, Татьяны и Ленского."}, {"topic": "Литература", "keys": ["толстой", "война", "и", "мир"], "answer": "«Война и мир» — роман Льва Николаевича Толстого.", "example": "В романе переплетаются истории нескольких семей на фоне наполеоновских войн."}, {"topic": "Информатика", "keys": ["алгоритм", "блок", "схема"], "answer": "Алгоритм — конечный набор понятных шагов для решения задачи.", "example": "Например: получить число, проверить его чётность, вывести «чётное» или «нечётное»."}, {"topic": "Информатика", "keys": ["переменная", "тип", "данных"], "answer": "Переменная хранит значение, которое программа может читать и изменять.", "example": "В JavaScript: let score = 10; затем score += 1."}, {"topic": "Информатика", "keys": ["функция", "программирование"], "answer": "Функция — именованный или анонимный блок кода, который можно вызывать многократно.", "example": "Пример JavaScript: function double(x){return x*2}. double(4) вернёт 8."}, {"topic": "Информатика", "keys": ["цикл", "for", "while", "повторение"], "answer": "Цикл повторяет блок команд, пока выполняется определённое условие или не закончатся элементы коллекции.", "example": "Пример JavaScript: for(let i=0;i<3;i++){console.log(i)} выводит 0, 1 и 2."}, {"topic": "Информатика", "keys": ["условие", "if", "else"], "answer": "Условный оператор выполняет разные действия в зависимости от истинности условия.", "example": "Пример: if(age>=18){...} else {...}."}, {"topic": "Информатика", "keys": ["массив", "список", "индекс"], "answer": "Массив хранит упорядоченную коллекцию элементов. Во многих языках первый элемент имеет индекс 0.", "example": "const colors=[\"красный\",\"синий\"]; colors[1] — «синий»."}, {"topic": "Информатика", "keys": ["html", "сайт", "разметка"], "answer": "HTML создаёт структуру страницы: заголовки, абзацы, списки, изображения и формы.", "example": "Пример: <h1>Привет</h1> создаёт заголовок."}, {"topic": "Информатика", "keys": ["css", "стили", "дизайн"], "answer": "CSS управляет внешним видом веб-страниц: цветом, размером, расположением и анимацией.", "example": "Пример: body { background:#111; color:white; }."}, {"topic": "Информатика", "keys": ["javascript", "js", "браузер"], "answer": "JavaScript добавляет интерактивность на веб-страницы и может работать на сервере.", "example": "Через addEventListener можно реагировать на нажатия кнопок."}, {"topic": "Информатика", "keys": ["python", "питон"], "answer": "Python — язык программирования с простым синтаксисом, популярный для автоматизации и анализа данных.", "example": "Пример: print(2+2) выведет 4."}, {"topic": "Информатика", "keys": ["ошибка", "баг", "отладка", "дебаг"], "answer": "Отладка — поиск и исправление ошибок в программе.", "example": "Начни с воспроизведения ошибки, проверь сообщения консоли, выясни минимальный сценарий, исправь код и протестируй."}, {"topic": "Информатика", "keys": ["искусственный", "интеллект", "нейросеть"], "answer": "Нейросеть — математическая модель с параметрами, подбираемыми при обучении на данных.", "example": "Большие языковые модели обучаются на огромных массивах текстов, но могут ошибаться и выдумывать факты."}, {"topic": "Информатика", "keys": ["интернет", "браузер", "сервер", "клиент"], "answer": "Браузер — программа-клиент, которая отображает сайты. Сервер отвечает на запросы и отдаёт данные.", "example": "HTML, CSS и JavaScript часто загружаются с сервера по HTTPS."}, {"topic": "Информатика", "keys": ["интернет", "безопасность", "пароль", "фишинг"], "answer": "Для безопасности используй уникальные пароли и двухфакторную аутентификацию, осторожно относись к подозрительным ссылкам.", "example": "Фишинговое письмо может подделывать известный сайт, чтобы выманить пароль."}, {"topic": "Игры", "keys": ["создать", "игру", "геймдизайн"], "answer": "Разработка игры начинается с основной механики: что делает игрок, какая цель и как он получает обратную связь.", "example": "Для 3D-песочницы сначала сделай карту и движение, затем добавь предметы, NPC и редактор."}, {"topic": "Игры", "keys": ["нпс", "npc", "поведение", "врага"], "answer": "Поведение NPC можно построить как конечный автомат: патрулирование, поиск, преследование, атака и отступление.", "example": "NPC переходит от патрулирования к преследованию, когда обнаруживает игрока."}, {"topic": "Игры", "keys": ["анимация", "ключевой", "кадр"], "answer": "Ключевые кадры задают положения объектов в определённые моменты времени, а промежуточные кадры могут вычисляться автоматически.", "example": "Для ходьбы персонажа можно задать противоположные движения рук и ног на нескольких ключевых кадрах."}, {"topic": "Игры", "keys": ["3d", "модель", "геометрия", "текстура"], "answer": "3D-модель описывает форму объекта, а текстура задаёт цветовые или материальные детали поверхности.", "example": "Кубическая модель монстра может состоять из отдельных кубиков, соединённых в группы."}, {"topic": "Игры", "keys": ["оптимизация", "fps", "производительность"], "answer": "Для хорошей производительности в игре нужно сокращать число тяжёлых вычислений и вызовов рендеринга.", "example": "Используй повторное применение геометрии и материалов, упрощай далёкие объекты, избегай лишних пересчётов каждый кадр."}, {"topic": "Логика", "keys": ["причина", "следствие", "корреляция"], "answer": "Корреляция означает статистическую связь, но сама по себе не доказывает причинно-следственную связь.", "example": "Летом растут и продажи мороженого, и число купающихся, но одно не обязательно вызывает другое."}, {"topic": "Логика", "keys": ["доказательство", "аргумент", "факт", "мнение"], "answer": "Факт проверяется наблюдением или источниками; мнение — оценочное суждение. Убедительный аргумент опирается на проверяемые основания.", "example": "«Вода кипит при около 100 °C на уровне моря» — проверяемое утверждение, «лето лучше зимы» — мнение."}, {"topic": "Логика", "keys": ["план", "цель", "задача", "шаги"], "answer": "Хороший план разбивает большую цель на конкретные задачи с приоритетами и проверками результата.", "example": "Чтобы создать сайт: продумай страницы, нарисуй макет, напиши HTML/CSS, добавь JavaScript, проверь на телефоне."}, {"topic": "Здоровье", "keys": ["сон", "зачем", "спать"], "answer": "Сон важен для памяти, восстановления и работы нервной системы. Недостаток сна ухудшает внимание и настроение.", "example": "Регулярный режим и спокойное время перед сном часто помогают лучше высыпаться."}, {"topic": "Здоровье", "keys": ["здоровое", "питание", "разнообразное"], "answer": "Сбалансированное питание включает разнообразные продукты и достаточное количество энергии для роста и активности.", "example": "Полезно включать овощи, фрукты, белковые продукты и цельные злаки; конкретные потребности различаются."}, {"topic": "Животные", "keys": ["бородатая", "агама", "ящерица"], "answer": "Бородатая агама — дневная рептилия родом из Австралии. Ей нужны подходящий прогрев, UVB-освещение и сбалансированное питание.", "example": "При резком изменении поведения лучше обратиться к ветеринару, работающему с рептилиями."}, {"topic": "Животные", "keys": ["кот", "кошка", "мурлыкание"], "answer": "Кошки могут мурлыкать в разных ситуациях, включая расслабление и стресс. По одному мурлыканью нельзя точно судить о самочувствии.", "example": "Важны общие признаки: аппетит, активность и поведение."}, {"topic": "Животные", "keys": ["собака", "дрессировка"], "answer": "В дрессировке собак обычно полезны последовательность, короткие занятия и положительное подкрепление.", "example": "Начни с простой команды и сразу поощряй успешное действие."}, {"topic": "Творчество", "keys": ["сюжет", "рассказ", "история", "персонаж"], "answer": "Хороший сюжет обычно включает героя, цель, препятствие, изменение и развязку.", "example": "Для короткого хоррора: герой приходит в заброшенную лабораторию и узнаёт, что свет привлекает необычное существо."}, {"topic": "Творчество", "keys": ["рисование", "композиция", "цвет"], "answer": "Композиция — расположение объектов на изображении. Контраст, освещение и цвет помогают выделить главный объект.", "example": "Для атмосферной сцены размести героя не по центру, добавь контровой свет и несколько планов глубины."}, {"topic": "Экономика", "keys": ["бюджет", "деньги", "расходы", "доход"], "answer": "Бюджет — план доходов и расходов. Он помогает распределять деньги между необходимыми тратами, целями и запасом.", "example": "Перед поездкой выдели транспорт, жильё, питание, развлечения и непредвиденные расходы."}];
+KNOWLEDGE.push({"topic":"Физика","keys":["почему небо голубое","цвет неба","голубое небо","рассеяние света"],"answer":"Днём небо кажется голубым, потому что молекулы воздуха сильнее рассеивают коротковолновую часть солнечного света, особенно сине-голубую.","example":"На закате свет идёт через более толстый слой атмосферы, поэтому Солнце и небо рядом с ним часто выглядят красноватыми."});
+KNOWLEDGE.push(...[{"topic":"Астрономия","keys":["чёрная дыра","черная дыра","горизонт событий","сингулярность"],"answer":"Чёрная дыра — область пространства-времени, из которой свет не может выйти наружу после пересечения горизонта событий. Она может образоваться после коллапса массивной звезды.","example":"Наблюдают не саму чёрную дыру, а её влияние на окружающий газ и звёзды."},{"topic":"Астрономия","keys":["большой взрыв","происхождение вселенной","расширение вселенной"],"answer":"Модель Большого взрыва описывает эволюцию Вселенной из очень горячего и плотного раннего состояния. Пространство расширяется; это не обычный взрыв в одной точке.","example":"Один из важных признаков — космическое микроволновое фоновое излучение."},{"topic":"Астрономия","keys":["марс","красная планета","атмосфера марса"],"answer":"Марс — четвёртая планета от Солнца. Он холодный, имеет разреженную атмосферу, состоящую в основном из углекислого газа.","example":"Марсианские роботы изучают породы и следы древней воды."},{"topic":"Астрономия","keys":["звезда","солнце","термоядерный синтез"],"answer":"Звезда излучает энергию благодаря термоядерным реакциям в ядре. Солнце — ближайшая к нам звезда.","example":"В ядре Солнца водород превращается в гелий, высвобождая энергию."},{"topic":"Астрономия","keys":["луна","затмение","фазы луны"],"answer":"Фазы Луны возникают из-за того, как наблюдатель видит освещённую Солнцем часть Луны. Лунное затмение происходит, когда Луна входит в земную тень.","example":"При новолунии обращённая к Земле сторона Луны почти не освещена."},{"topic":"Астрономия","keys":["экзопланета","планета у другой звезды"],"answer":"Экзопланета — планета за пределами Солнечной системы. Её можно обнаружить, например, по небольшому ослаблению света звезды во время прохождения планеты перед ней.","example":"Метод транзитов позволяет оценить размер экзопланеты."},{"topic":"Физика","keys":["чёрные дыры","относительность","эйнштейн","искривление времени"],"answer":"Общая теория относительности описывает гравитацию как искривление пространства-времени под действием массы и энергии.","example":"Вблизи массивного тела часы идут немного медленнее относительно часов вдали от него."},{"topic":"Физика","keys":["квантовая физика","квантовая механика","квант"],"answer":"Квантовая механика описывает поведение материи и света на очень малых масштабах. Часто она предсказывает вероятности результатов измерений, а не однозначный исход.","example":"Электрон в атоме описывают квантовыми состояниями, а не маленькой планетой на классической орбите."},{"topic":"Физика","keys":["магнит","магнетизм","магнитное поле"],"answer":"Магнитное поле связано с движением электрических зарядов и магнитными свойствами вещества. Оно действует на другие магниты и движущиеся заряды.","example":"Компас ориентируется по магнитному полю Земли."},{"topic":"Физика","keys":["трение","почему скользит","сцепление"],"answer":"Трение — сила, препятствующая относительному движению соприкасающихся поверхностей. Оно помогает ходить, но может приводить к потере энергии в виде тепла.","example":"На льду трение подошвы о поверхность обычно ниже, поэтому проще поскользнуться."},{"topic":"Физика","keys":["плотность","масса и объем","масса и объём"],"answer":"Плотность — масса единицы объёма: ρ = m/V. По плотности можно сравнить материалы одинакового объёма.","example":"Если 200 г вещества занимают 100 см³, плотность равна 2 г/см³."},{"topic":"Математика","keys":["отрицательное число","минус","целые числа"],"answer":"Отрицательные числа расположены левее нуля на числовой прямой. При вычитании отрицательного числа получается сложение противоположного ему положительного.","example":"5 − (−3) = 8; −2 × −4 = 8."},{"topic":"Математика","keys":["формула","переменная","подставить значение"],"answer":"Формула выражает связь величин. Чтобы найти результат, подставь известные значения, приведи единицы к совместимым и вычисли.","example":"По формуле s = vt при v = 5 м/с и t = 4 с путь равен 20 м."},{"topic":"Математика","keys":["функция","график функции","координаты"],"answer":"Функция задаёт правило, по которому каждому допустимому значению x сопоставляется значение y. Её можно показывать графиком.","example":"Для y = 2x + 1 при x = 3 значение y равно 7."},{"topic":"Математика","keys":["периметр","сумма сторон"],"answer":"Периметр многоугольника — сумма длин всех его сторон.","example":"У прямоугольника со сторонами 3 и 5 см периметр 2 × (3 + 5) = 16 см."},{"topic":"Математика","keys":["объём","объем","кубометр","кубические"],"answer":"Объём показывает, сколько трёхмерного пространства занимает тело. Объём прямоугольного параллелепипеда равен длине × ширине × высоте.","example":"Коробка 2 × 3 × 4 см имеет объём 24 см³."},{"topic":"Математика","keys":["логарифм","логарифмы"],"answer":"Логарифм log_b(a) показывает степень, в которую нужно возвести основание b, чтобы получить a.","example":"log₂(8) = 3, потому что 2³ = 8."},{"topic":"Математика","keys":["статистика","медиана","среднее значение"],"answer":"Медиана — средний элемент упорядоченного набора значений; для чётного количества берут среднее двух центральных.","example":"Для 1, 2, 9 медиана равна 2, среднее арифметическое — 4."},{"topic":"Информатика","keys":["алгоритм","алгоритмы","блок схема"],"answer":"Алгоритм — последовательность понятных действий для решения задачи. Важно, чтобы шаги были однозначны и заканчивались результатом.","example":"Алгоритм поиска максимума: возьми первое число, сравнивай с остальными и запоминай большее."},{"topic":"Информатика","keys":["переменная","тип данных","программирование"],"answer":"Переменная в программе хранит значение. Тип данных определяет, какие операции с ним допустимы.","example":"В JavaScript: let score = 10; затем score += 5 изменит значение на 15."},{"topic":"Информатика","keys":["массив","список","коллекция"],"answer":"Массив или список хранит несколько элементов в определённом порядке. Это удобно для перебора и обработки похожих данных.","example":"В JavaScript: const items = [3, 5, 7]; items[1] равно 5."},{"topic":"Информатика","keys":["цикл","for","while","повторение в коде"],"answer":"Цикл повторяет набор действий. Нужно предусмотреть условие остановки, чтобы цикл не стал бесконечным.","example":"for (let i=0; i<3; i++) выводит i со значениями 0, 1 и 2."},{"topic":"Информатика","keys":["функция","параметры","возврат значения"],"answer":"Функция — переиспользуемый блок кода. Она может принимать параметры и возвращать результат.","example":"function square(x){return x*x} возвращает квадрат числа."},{"topic":"Информатика","keys":["ошибка javascript","debug","отладка","баг"],"answer":"Отладка начинается с воспроизведения ошибки. Проверь текст сообщения, место сбоя, входные данные и изменения после последней рабочей версии.","example":"В браузере ошибки JavaScript можно искать в консоли разработчика; на iPad удобно проверять простые логи в интерфейсе."},{"topic":"Информатика","keys":["нейросеть","нейрон","обучение модели","машинное обучение"],"answer":"Машинное обучение подбирает параметры модели на примерах. При обучении нейросети веса меняются так, чтобы уменьшить ошибку на обучающих данных.","example":"Модель классификации изображений обучается на размеченных картинках, а затем предсказывает метки новых."},{"topic":"Информатика","keys":["большая языковая модель","llm","языковая модель","токен"],"answer":"Большая языковая модель обучается предсказывать текстовые токены в контексте. Она может поддерживать диалог, но иногда ошибается и выдумывает факты.","example":"Для новых сведений или точных данных модели обычно нужны внешние источники."},{"topic":"Информатика","keys":["api","апи","программный интерфейс"],"answer":"API — интерфейс, через который одна программа обращается к возможностям другой. Часто используется HTTP-запрос с данными и ответом в JSON.","example":"Приложение может запросить у сервера ответ языковой модели через API."},{"topic":"Информатика","keys":["интернет","сайт","сервер","браузер"],"answer":"Браузер запрашивает веб-страницу у сервера и показывает её. HTML задаёт структуру, CSS — оформление, JavaScript — действия.","example":"Без интернета отдельный HTML-файл всё равно может работать, если не зависит от сервера."},{"topic":"Информатика","keys":["память компьютера","оперативная память","ram"],"answer":"Оперативная память хранит данные, с которыми сейчас работает компьютер. Постоянное хранилище сохраняет файлы после выключения питания.","example":"Запущенная игра использует ОЗУ, а её сохранения могут лежать на диске."},{"topic":"Информатика","keys":["шифрование","пароль","двухфакторная аутентификация"],"answer":"Шифрование делает данные нечитаемыми без подходящего ключа. Сильные уникальные пароли и двухфакторная защита уменьшают риск взлома аккаунтов.","example":"Для разных сервисов лучше использовать разные пароли и менеджер паролей."},{"topic":"Биология","keys":["митохондрия","атф","энергия клетки"],"answer":"Митохондрии участвуют в получении клеткой энергии через клеточное дыхание и образовании АТФ.","example":"АТФ служит универсальным переносчиком энергии во многих клеточных процессах."},{"topic":"Биология","keys":["нервная система","нейрон","мозг"],"answer":"Нервная система получает информацию, обрабатывает её и управляет действиями организма. Нейроны передают сигналы электрически и химически.","example":"Рефлекс позволяет быстро отдёрнуть руку от горячего, ещё до осознанного обдумывания."},{"topic":"Биология","keys":["дыхание","лёгкие","кислород"],"answer":"Лёгкие обеспечивают обмен кислорода и углекислого газа между воздухом и кровью.","example":"В альвеолах кислород переходит в кровь, а углекислый газ — в выдыхаемый воздух."},{"topic":"Биология","keys":["пищеварение","желудок","кишечник"],"answer":"Пищеварительная система расщепляет пищу и всасывает питательные вещества. Большая часть всасывания происходит в тонком кишечнике.","example":"В желудке пища перемешивается и обрабатывается кислотой и ферментами."},{"topic":"Биология","keys":["экология","загрязнение","окружающая среда"],"answer":"Экология изучает взаимодействия организмов друг с другом и с окружающей средой. Загрязнение может нарушать эти связи.","example":"Сокращение отходов и защита местообитаний помогают поддерживать экосистемы."},{"topic":"Химия","keys":["окисление","ржавчина","коррозия"],"answer":"Коррозия — постепенное разрушение материала при взаимодействии со средой. Ржавление железа связано с реакциями с кислородом и водой.","example":"Краска защищает металл от контакта с водой и кислородом."},{"topic":"Химия","keys":["раствор","растворение","растворитель"],"answer":"Раствор — однородная смесь, в которой вещества распределены на молекулярном или ионном уровне.","example":"Соль растворяется в воде, но не исчезает: её частицы распределяются в жидкости."},{"topic":"Химия","keys":["периодическая таблица","химический элемент","атомный номер"],"answer":"Химический элемент определяется числом протонов в ядре. Периодическая таблица упорядочивает элементы по атомному номеру.","example":"У кислорода атомный номер 8, значит, в ядре атома кислорода 8 протонов."},{"topic":"География","keys":["землетрясение","тектонические плиты"],"answer":"Землетрясения возникают при резком смещении горных пород, часто на границах литосферных плит.","example":"Эпицентр — точка на поверхности Земли над очагом землетрясения."},{"topic":"География","keys":["вулкан","магма","лава"],"answer":"Вулкан — место выхода магмы, газов и обломочного материала на поверхность Земли. Когда магма выходит наружу, её называют лавой.","example":"Многие вулканы расположены у границ литосферных плит."},{"topic":"География","keys":["почему сменяются времена года","времена года","наклон оси земли"],"answer":"Времена года связаны с наклоном земной оси относительно плоскости орбиты. Из-за него меняются высота Солнца и длительность дня.","example":"Летом в Северном полушарии солнечные лучи падают более прямо, а день длится дольше."},{"topic":"География","keys":["часовые пояса","разница во времени"],"answer":"Часовые пояса помогают согласовывать местное время с вращением Земли. Разница между городами зависит от выбранных часовых зон и перехода на летнее время.","example":"Для точного времени сейчас нужны актуальные настройки часового пояса."},{"topic":"История","keys":["древний рим","римская империя"],"answer":"Древний Рим прошёл путь от города-государства до обширной республики и империи. Римское право, дороги и архитектура заметно повлияли на историю Европы.","example":"Западная Римская империя традиционно считается прекратившей существование в 476 году."},{"topic":"История","keys":["древний египет","пирамиды","фараон"],"answer":"Древний Египет — одна из древнейших цивилизаций долины Нила, известная письменностью, храмами и пирамидами.","example":"Пирамиды Гизы строились как царские погребальные комплексы."},{"topic":"История","keys":["промышленная революция","индустриализация"],"answer":"Промышленная революция связана с переходом от ручного труда к машинному производству, ростом фабрик и городов.","example":"Паровые машины ускорили производство и транспорт в XVIII–XIX веках."},{"topic":"История","keys":["первая мировая война","1914","1918"],"answer":"Первая мировая война длилась с 1914 по 1918 год. Её причинами были международные противоречия, военные союзы и кризисы, а непосредственным поводом — убийство эрцгерцога Франца Фердинанда.","example":"Война привела к огромным потерям и изменению политической карты Европы."},{"topic":"История","keys":["вторая мировая война","1939","1945"],"answer":"Вторая мировая война длилась с 1939 по 1945 год и охватила многие страны мира. Она началась с нападения нацистской Германии на Польшу 1 сентября 1939 года.","example":"После войны была создана Организация Объединённых Наций."},{"topic":"Русский язык","keys":["подлежащее","сказуемое","грамматическая основа"],"answer":"Грамматическая основа предложения состоит из подлежащего и сказуемого либо одного главного члена в односоставном предложении.","example":"«Птица поёт»: «птица» — подлежащее, «поёт» — сказуемое."},{"topic":"Русский язык","keys":["приставка","суффикс","корень","окончание"],"answer":"Морфемный разбор выделяет значимые части слова: приставку, корень, суффикс и окончание, если они есть. Основа — часть слова без окончания.","example":"В слове «подводный»: под- — приставка, -вод- — корень, -н- — суффикс, -ый — окончание."},{"topic":"Русский язык","keys":["части речи","существительное","глагол","прилагательное"],"answer":"Части речи группируют слова по общему значению и грамматическим признакам. Существительное обычно называет предмет, глагол — действие, прилагательное — признак.","example":"«Кошка быстро бежит»: «кошка» — существительное, «бежит» — глагол, «быстро» — наречие."},{"topic":"Литература","keys":["метафора","сравнение","эпитет"],"answer":"Метафора — переносное значение по сходству; сравнение явно сопоставляет предметы; эпитет — образное определение.","example":"«Море огней» — метафора; «белый как снег» — сравнение."},{"topic":"Логика","keys":["логика","аргумент","вывод","посылка"],"answer":"Логика помогает оценивать, следует ли вывод из посылок. Важно отличать достоверность фактов от правильности рассуждения.","example":"«Все кошки — животные; Мурка — кошка; следовательно, Мурка — животное» — корректный вывод."},{"topic":"Логика","keys":["критическое мышление","источник информации","проверка фактов"],"answer":"Критическое мышление — умение проверять утверждения, оценивать доказательства и замечать ошибки в рассуждениях.","example":"Для спорного факта полезно сравнить независимые надёжные источники."},{"topic":"Экономика","keys":["инфляция","цены растут","покупательная способность"],"answer":"Инфляция — устойчивый рост общего уровня цен, из-за которого на ту же сумму денег со временем можно купить меньше товаров и услуг.","example":"Если цены выросли на 5%, а доход не изменился, покупательная способность дохода обычно уменьшилась."},{"topic":"Экономика","keys":["бюджет","расходы","доходы","экономия"],"answer":"Личный бюджет — план доходов, расходов и сбережений. Сначала полезно учесть обязательные расходы, затем желательные покупки.","example":"Если откладывать фиксированную сумму регулярно, проще накопить на конкретную цель."},{"topic":"Техника","keys":["двигатель","электродвигатель","мотор"],"answer":"Электродвигатель превращает электрическую энергию в механическое движение за счёт взаимодействия токов и магнитных полей.","example":"Такие двигатели работают в вентиляторах и многих электромобилях."},{"topic":"Техника","keys":["батарейка","аккумулятор","зарядка"],"answer":"Батарея преобразует химическую энергию в электрическую. Аккумулятор допускает многократную зарядку в предусмотренных условиях.","example":"Ёмкость аккумулятора часто указывают в мА·ч, но время работы зависит и от мощности нагрузки."},{"topic":"Искусство","keys":["рисование","композиция","свет и тень"],"answer":"Композиция определяет расположение важных элементов изображения. Контраст, свет и перспектива помогают сделать рисунок выразительнее.","example":"Чтобы выделить персонажа, используй светлый силуэт на более тёмном фоне."},{"topic":"Искусство","keys":["перспектива","точка схода","горизонт"],"answer":"Линейная перспектива помогает передать глубину: параллельные линии, уходящие вдаль, на рисунке могут сходиться к точке на горизонте.","example":"Рельсы на прямом участке выглядят ближе друг к другу вдали."},{"topic":"Игры","keys":["npc","нпс","искусственный интеллект в играх","nextbot"],"answer":"Игровые NPC часто используют конечные автоматы состояний, деревья поведения или навигационные сетки. Враг может переключаться между поиском, преследованием и атакой.","example":"Для nextbot удобно иметь состояния «патрулировать», «заметить игрока», «догнать», «потерять след»."},{"topic":"Игры","keys":["анимация","ключевые кадры","кости персонажа"],"answer":"Анимация задаёт изменение параметров модели во времени. Между ключевыми кадрами можно интерполировать положение, вращение и масштаб деталей.","example":"Для шага поставь ключевые кадры ног в крайних позициях, затем добавь промежуточные."},{"topic":"Игры","keys":["коллизия","столкновение","физика в играх"],"answer":"Коллизия — проверка пересечения объектов. Отдельные коллайдеры позволяют рассчитывать столкновения проще, чем точная геометрия модели.","example":"Персонаж может иметь капсульный коллайдер, а коробки — прямоугольные."},{"topic":"Игры","keys":["оптимизация игры","лаг","fps","кадры в секунду"],"answer":"Для плавной игры важно ограничивать количество дорогих операций на каждом кадре: сложную физику, новые объекты, большие текстуры.","example":"Обновляй поиск пути NPC реже, чем перерисовывается экран, и переиспользуй объекты."}]);
+// V7: дополнительные повседневные темы и вопросы.
+KNOWLEDGE.push(...[
+ {topic:'Здоровье',keys:['пульс','сердцебиение','учащенное сердцебиение'],answer:'Пульс показывает, как часто сокращается сердце за минуту. Он меняется с возрастом, нагрузкой, волнением, температурой и самочувствием.',example:'После бега пульс обычно учащается, а в состоянии покоя постепенно снижается.'},
+ {topic:'Здоровье',keys:['артериальное давление','тонометр','давление'],answer:'Артериальное давление — сила, с которой кровь действует на стенки сосудов. Его измеряют двумя числами, а интерпретация зависит от возраста и обстоятельств.',example:'Чтобы уменьшить случайную ошибку, измерение проводят после нескольких минут спокойного отдыха.'},
+ {topic:'Здоровье',keys:['аллергия','сыпь','чихание','зуд'],answer:'Аллергия — чрезмерная реакция иммунной системы на обычно безвредное вещество. Проявления бывают разными: от насморка до кожных реакций.',example:'Если становится трудно дышать или быстро отекает лицо или горло, нужна экстренная помощь.'},
+ {topic:'Здоровье',keys:['обезвоживание','мало воды','жажда'],answer:'Обезвоживание возникает, если организм теряет больше жидкости, чем получает. Возможны жажда, сухость во рту и слабость.',example:'При обычной жажде полезно попить воды, а при тяжёлом состоянии — обратиться за медицинской помощью.'},
+ {topic:'Быт',keys:['зарядка телефона','телефон не заряжается','кабель зарядки'],answer:'Если телефон не заряжается, сначала проверь питание, кабель и адаптер, не нагревается ли устройство и нет ли видимых повреждений.',example:'Попробуй другой исправный кабель и розетку. Не используй повреждённые зарядные устройства.'},
+ {topic:'Быт',keys:['интернет не работает','вай фай','wifi','wi fi'],answer:'При проблемах с интернетом проверь включён ли Wi-Fi, есть ли связь на других устройствах, а затем попробуй переподключиться к сети.',example:'Если не работает ни одно устройство, причиной может быть роутер или провайдер.'},
+ {topic:'Быт',keys:['как учить','запоминать','подготовиться к уроку'],answer:'Лучше учиться небольшими частями: понять пример, объяснить своими словами и проверить себя без подсказки.',example:'После изучения правила попробуй решить 3 разных задачи, затем вернись к теме на следующий день.'},
+ {topic:'Быт',keys:['план дня','организация времени','тайм менеджмент'],answer:'Выбери 2–3 главных задачи, оцени необходимое время, добавь перерывы и оставь небольшой запас на неожиданности.',example:'Сначала реши важную задачу, затем переходи к мелким.'},
+ {topic:'Техника',keys:['батарея быстро садится','аккумулятор разряжается','плохо держит заряд'],answer:'Быстрая разрядка бывает связана с яркостью экрана, фоновыми приложениями, слабым сигналом и старением аккумулятора.',example:'Посмотри статистику расхода батареи и обновления программ.'},
+ {topic:'Русский язык',keys:['проверочное слово','безударная гласная'],answer:'Для проверки безударной гласной в корне нужно подобрать родственное слово или изменить форму так, чтобы гласная стала ударной.',example:'Вода — воды: под ударением слышен звук «о».'},
+ {topic:'Русский язык',keys:['сколько букв','сколько звуков','фонетический разбор'],answer:'При фонетическом разборе нужно учитывать, что число букв и звуков может отличаться: некоторые буквы обозначают два звука, а ь и ъ не обозначают отдельного звука.',example:'В слове «ёлка» четыре буквы, но пять звуков.'},
+ {topic:'Математика',keys:['длина','миллиметры','сантиметры','метры'],answer:'В одном сантиметре 10 миллиметров, в одном метре 100 сантиметров, а в одном километре 1000 метров.',example:'250 см = 2,5 м.'},
+ {topic:'Математика',keys:['дробь','разделить','деление'],answer:'Деление показывает, сколько раз одно число содержится в другом или как разделить число на равные части.',example:'12 ÷ 3 = 4.'},
+ {topic:'Информатика',keys:['почему игра лагает','тормозит игра','низкий fps'],answer:'Игра может тормозить из-за большого числа объектов, тяжёлых текстур, сложных эффектов и нагрузки на устройство.',example:'Уменьши количество одновременно активных объектов и проверь частоту обновления игровых скриптов.'},
+ {topic:'Информатика',keys:['как сделать нейросеть','локальный ии','офлайн модель'],answer:'Чтобы получить гибкие ответы, нужна обученная языковая модель. Обычный HTML-справочник не заменяет её. На достаточно мощных устройствах некоторые небольшие модели можно запускать локально.',example:'При работе локальной модели качество зависит от её размера и возможностей устройства.'},
+ {topic:'География',keys:['паспорт','поездка за границу','путешествие документы'],answer:'Для поездки за границу проверь действительность документов, правила въезда, транспорт и медицинские требования страны назначения.',example:'Условия въезда могут меняться — перед выездом нужна актуальная информация из официальных источников.'},
+ {topic:'Логика',keys:['как выбрать','как принять решение','что лучше выбрать'],answer:'Сравни варианты по трём критериям: насколько они подходят цели, какие у них ограничения и что будет, если план не сработает.',example:'Для выбора программы оцени удобство, стоимость и поддержку твоего устройства.'},
+ {topic:'Общение',keys:['как помириться','поссорился','друг обиделся'],answer:'Для примирения попробуй спокойно объяснить, что произошло, выслушать другую сторону и предложить конкретный шаг, который поможет исправить ситуацию.',example:'Можно начать с фразы «Мне жаль, что мы поссорились. Я хочу понять, что тебя задело».'},
+ {topic:'Общение',keys:['волнуюсь','страшно','тревожно','переживаю'],answer:'Когда волнуешься, может помочь спокойная обстановка, обычное ровное дыхание и разговор с человеком, которому доверяешь.',example:'Полезно разбить беспокоящую задачу на один небольшой выполнимый шаг.'},
+ {topic:'Быт',keys:['что приготовить','рецепт','готовить еду'],answer:'Начни с того, какие продукты есть, сколько времени и какую посуду можно использовать. Подбирай простой рецепт и соблюдай правила безопасности на кухне.',example:'Для салата можно смешать помидор, огурец и зелень.'}
+]);
+const STOPWORDS=new Set('что такое почему как зачем где когда кто какой какая какие есть мне можно нужно расскажи объясни пожалуйста сделать сделать ли это оно она они его её их для при или если без такой такого будет будет ли про уже мне очень больше более тут эти этот какова чем между можно ли пожалуйста ответь вопрос сложный вопроса'.split(' '));
+function tokenize(s){return (String(s).toLowerCase().replace(/ё/g,'е').match(/[a-zа-я0-9]+/g)||[]).filter(w=>w.length>2&&!STOPWORDS.has(w));}
+function stem(w){return w.replace(/(иями|ями|ами|ость|остей|ение|ения|ение|ировать|ирует|ирует|ский|ская|ские|ского|ических|ическ|ами|ыми|ого|ему|ому|ими|ыми|ова|ный|ное|ные|ную|ение|ить|ать|ять|ов|ев|ия|ие|ые|ой|ый|ий|ая|ое|ым|ем|ам|ах|ом|ей|у|а|ы|и|е|я|ь|н)$/,'');}
+function kbSearch(q){
+ // Совпадения ищем по смысловым словам именно нового запроса.
+ // Одна случайная общая часть слова не считается подходящей темой.
+ const tokens=[...new Set(tokenize(q).map(stem).filter(w=>w.length>=3))];
+ if(!tokens.length)return [];
+ const results=[];
+ for(const item of KNOWLEDGE){
+  let best=0;
+  for(const key of item.keys){
+   const words=tokenize(key).map(stem).filter(w=>w.length>=3);
+   if(!words.length)continue;
+   const hits=words.filter(k=>tokens.some(t=>k===t||(k.length>=5&&t.length>=5&&(k.startsWith(t)&&Math.min(k.length,t.length)>=Math.max(k.length,t.length)*.8))));
+   if(hits.length!==words.length)continue;
+   const coverage=hits.length/tokens.length;
+   // Короткие ключи не должны захватывать длинные посторонние вопросы.
+   if(words.length===1 && tokens.length>=4 && coverage<.34)continue;
+   best=Math.max(best,20+words.length*6+coverage*12);
+  }
+  if(best)results.push({item,score:best,hits:1});
+ }
+ return results.sort((a,b)=>b.score-a.score);
+}
+function solveStructured(text){
+ const q=text.toLowerCase().replace(/,/g,'.');
+ let m=q.match(/(?:найди|сколько|чему равно)?\s*(\d+(?:\.\d+)?)\s*%\s*(?:от|числа)\s*(\d+(?:\.\d+)?)/);
+ if(m){let p=+m[1],a=+m[2];let val=a*p/100;return `Решение: ${p}% от ${a} = ${a} × ${p} ÷ 100 = ${+val.toFixed(6)}.`;}
+ m=q.match(/(?:реши|уравнение|найди x|найти x)[:\s]*([+-]?\d+(?:\.\d+)?)?\s*\*?\s*x\s*([+-])\s*(\d+(?:\.\d+)?)\s*=\s*([+-]?\d+(?:\.\d+)?)/i);
+ if(m){const a=m[1]?Number(m[1]):1,b=Number(m[3])*(m[2]==='-'?-1:1),c=Number(m[4]);if(a===0)return 'Если коэффициент при x равен 0, нужно отдельно проверить равенство свободных членов.';const x=(c-b)/a;return `Решение уравнения ${a}x ${b<0?'-':'+'} ${Math.abs(b)} = ${c}:\n1. Переносим свободный член: ${a}x = ${c-b}.\n2. Делим на ${a}: x = ${+x.toFixed(7)}.\n3. Проверка: ${a} × ${+x.toFixed(7)} ${b<0?'-':'+'} ${Math.abs(b)} ≈ ${c}.`;}
+ return '';
+}
+// V7: коррекция распространённых опечаток и упрощение текста до поиска.
+function normalizeQuestion(text){
+ let q=String(text).toLowerCase().replace(/ё/g,'е').replace(/[!?.,;:()]+/g,' ').replace(/\s+/g,' ').trim();
+ const corrections=[
+  [/\bделат\b/g,'делать'],[/\bпулс\b/g,'пульс'],[/\bпульсс\b/g,'пульс'],
+  [/\bболитт\b/g,'болит'],[/\bвысоки\b/g,'высокий'],[/\bпалецц\b/g,'палец'],
+  [/\bсердцебиениее\b/g,'сердцебиение'],[/\bгалава\b/g,'голова'],
+  [/\bтэмпература\b/g,'температура'],[/\bшто\b/g,'что'],[/\bпачему\b/g,'почему'],
+  [/\bобясни\b/g,'объясни'],[/\bисправи\b/g,'исправь']
+ ];
+ for(const [re,correct] of corrections)q=q.replace(re,correct);
+ return q;
+}
+// Abyshka v6 — осторожные ответы на повседневные вопросы о самочувствии.
+// Запускаются до тематического поиска, чтобы медицинские запросы не попадали в случайные темы.
+function everydayHealthReply(text,thoughtful=false){
+ const q=normalizeQuestion(text);
+ if(/(?:пульс|сердцебиени|тахикард|сердце\s+(?:сильно|быстро)\s+бьет)/.test(q)){
+  return 'Высокий пульс — это учащённое сердцебиение. Оно бывает после движения, волнения, жары, недостатка жидкости или при температуре; иногда причиной могут быть другие состояния. Значение зависит от возраста, ситуации и того, измеряли ли пульс в покое.\n\nЧто сделать: прекрати нагрузку, сядь и спокойно отдохни несколько минут, выпей воды при необходимости и повторно измерь пульс. Если ты ребёнок или подросток, сообщи взрослому, которому доверяешь. Не принимай самостоятельно лекарства для снижения пульса.\n\nСрочно обратись за экстренной помощью, если есть боль в груди, выраженная одышка, обморок или сильное предобморочное состояние. Если пульс в покое остаётся необычно высоким, повторяется или вызывает беспокойство, нужен совет врача.\n\nСколько ударов в минуту, сколько тебе лет, измерено в покое или после движения и есть ли ещё симптомы?';
+ }
+ if(/(?:давлени|гипертони)/.test(q) && /(?:высок|повыс|скач|нормаль|опасн|что делат)/.test(q)){
+  return 'Повышенное давление может не давать заметных симптомов. Сядь спокойно, повтори измерение по инструкции к тонометру и запиши результат. Оценка зависит от возраста и условий измерения; сообщи взрослому, если ты несовершеннолетний. Не принимай новые лекарства самостоятельно. При боли в груди, серьёзном затруднении дыхания, внезапной слабости или нарушении речи вызывай экстренную помощь. Напиши цифры давления и возраст — объясню, как их обычно оценивают.';
+ }
+ if(/(?:температур|жар|лихорадк)/.test(q) && /(?:высок|поднял|что делат|боле|тело|озноб)/.test(q)){
+  return 'Повышенная температура часто связана с инфекцией, но у неё бывают разные причины. Отдыхай, пей достаточно жидкости, избегай перегрева. Если температура очень высокая, сохраняется, или состояние ухудшается, обратись к врачу. Срочно нужна помощь при спутанности, затруднённом дыхании, судорогах или выраженной сонливости. Сколько градусов, как давно и какие ещё симптомы?';
+ }
+ if(/(?:кашел|насморк|простуд|горл)/.test(q) && /(?:бол|что делат|леч|симптом|сильн)/.test(q)){
+  return 'Кашель, насморк и боль в горле часто бывают при вирусных инфекциях и раздражении дыхательных путей. Помогают отдых, питьё и свежий воздух. При затруднённом дыхании, сильной боли, выраженном ухудшении самочувствия или продолжительных симптомах обратись за медицинской помощью. Что именно беспокоит и сколько дней?';
+ }
+ const symptom=/(болит|боль|ноет|тянет|распух|отек|покраснел|покраснение|онемел|немеет|ушиб|травм|порез|температур|тошнит|головокружение|зуд)/.test(q);
+ const anatomy=/(палец|пальц|рук|кист|ног|колен|голов|живот|спин|горл|ухо|зуб|глаз|запяст|сустав)/.test(q);
+ if(!symptom || !anatomy)return null;
+ if(/палец|пальц|кист|рук/.test(q)){
+  let answer='Боль в пальце или кисти может возникнуть из-за ушиба, перегрузки, растяжения, раздражения сустава или воспаления около ногтя. По одному сообщению определить точную причину нельзя.\n\nЧто можно сделать сейчас:\n• Дай руке отдых и временно избегай движений, которые усиливают боль.\n• Если боль началась после ушиба и есть отёк, приложи прохладный компресс через ткань на 10–15 минут.\n• Если есть кольцо и палец отекает, сними кольцо, пока это легко сделать.\n• Не пытайся силой выпрямлять палец или вправлять его самостоятельно.\n\nНужна срочная медицинская помощь, если палец сильно деформирован, внезапно очень сильно болит, посинел или побледнел, стал холодным, потерял чувствительность либо им трудно двигать после травмы. При нарастающем покраснении, выраженном отёке, гное или температуре тоже обратись за медицинской помощью. Если боль сохраняется или усиливается, лучше показаться врачу.';
+  answer+='\n\nУточни, пожалуйста: какой палец болит, где именно (у ногтя, в суставе или по всей длине), был ли удар и есть ли припухлость?';
+  return answer;
+ }
+ if(/голов/.test(q))return 'Головная боль бывает при недосыпе, стрессе, обезвоживании и по другим причинам. Отдохни, попей воды и обрати внимание на сопутствующие симптомы. Если боль внезапная и очень сильная, есть спутанность, слабость в руке или ноге, проблемы со зрением или речь нарушена — нужна срочная медицинская помощь. Если головные боли повторяются или усиливаются, обратись к врачу. Где и как долго болит голова?';
+ if(/живот/.test(q))return 'Боль в животе может быть связана с пищеварением, инфекцией и другими причинами. Точный ответ по одному сообщению дать нельзя. Если боль сильная или усиливается, живот становится очень болезненным при прикосновении, есть повторная рвота, кровь или обморок — нужна срочная медицинская помощь. Если боль не проходит, обратись к врачу. Где именно болит и как давно?';
+ if(/зуб/.test(q))return 'Боль в зубе может появиться из-за кариеса, воспаления десны или чувствительности зуба. Стоит записаться к стоматологу; если есть сильный отёк лица, высокая температура или трудно глотать и дышать — требуется срочная помощь. Как давно болит зуб?';
+ return 'Такой симптом может иметь несколько причин, и по одному сообщению нельзя определить диагноз. Пока избегай того, что усиливает боль или раздражение. Если боль сильная, нарастает, появилась после травмы или есть выраженный отёк, слабость либо температура — обратись за медицинской помощью. Уточни, где именно болит, как давно и какие есть другие симптомы.';
+}
+// Контекстные ответы и распознавание смены темы. Память берётся из текущего чата.
+function contextualOfflineAnswer(text,chat){
+ const q=normalizeQuestion(text);
+ if(/(?:не горит|не светит|не включается|перестала гореть|не работает)\s+(?:лампа|лампочка|свет)|(?:лампа|лампочка|свет)\s+(?:не горит|не светит|не включается|не работает)/.test(q))
+  return 'Если лампа не горит, возможны перегоревшая лампочка, выключенный свет, отсутствие питания или неисправный светильник. Сначала проверь выключатель и работает ли свет в других комнатах. Не разбирай светильник под напряжением. Если есть запах гари, искры или нагрев — не трогай его и позови взрослого или электрика. Это обычная домашняя лампа, настольная или лампа в террариуме?';
+ if(/^(?:а почему|почему так|а как это|объясни подробнее|а это почему|что это значит|а дальше)[?.! ]*$/.test(q)){
+  const prev=chat.messages.filter(m=>m.role==='user'&&m.content!==text).slice(-1)[0];
+  if(prev)return 'Ты уточняешь предыдущий вопрос: «'+prev.content.slice(0,120)+'». '+knowledgeReply(prev.content,true);
+ }
+ if(/(?:что я (?:спрашивал|писал)|помнишь мой вопрос|о чем мы говорили)/.test(q)){
+  const recent=chat.messages.filter(m=>m.role==='user'&&m.content!==text).slice(-4).map(m=>'• '+m.content);
+  return recent.length?'В этом чате ты недавно спрашивал:\n'+recent.join('\n'):'В этом чате пока нет предыдущих вопросов.';
+ }
+ return null;
+}
+function lampAnswer(q){
+ if(!/(ламп|лампоч|светильник|люстр|фонар)/.test(q))return null;
+ if(!/(перегор|не горит|не светит|не включ|не работа|сломал|погас|замен|почин|что делать|почему)/.test(q))return null;
+ if(/перегор/.test(q))return 'Если лампочка перегорела, выключи свет и дай ей остыть. Попроси взрослого заменить её на подходящую по типу цоколя и допустимой мощности. Не трогай повреждённые провода или патрон. Если новая лампа тоже не горит, вероятна проблема с питанием, выключателем или светильником — лучше обратиться к электрику.';
+ return 'Если лампа не горит, возможны перегоревшая лампочка, отсутствие питания или неисправность выключателя или светильника. Проверь, работает ли свет в других местах, но не разбирай электрические части. При искрах, запахе гари или сильном нагреве не пользуйся светильником и сообщи взрослому. Какая это лампа: домашняя, настольная или для террариума?';
+}
+
+// v20: scenario-oriented offline troubleshooting. Never substitute an unrelated encyclopedia entry.
+const TROUBLESHOOTING_RULES=[
+ {name:'аквариум',thing:/аквариум|рыбк|рыбочк/,problem:/разбил|разбит|треснул|лопнул|протек|течет|сломал|упал/,answer:'Если аквариум разбился или протекает, сначала отойди от осколков и воды рядом с электрическими приборами. Позови взрослого. Не трогай мокрые вилки, провода или оборудование; взрослому нужно безопасно отключить питание. Если рыбки остались без воды, их следует временно поместить в чистую подходящую ёмкость с водой из аквариума, если её удалось сохранить. Не собирай стекло голыми руками. Повреждённый аквариум лучше заменить, а не использовать снова без профессиональной проверки.'},
+ {name:'шкаф и аквариум',thing:/шкаф|полк|тумб|стеллаж/,problem:/аквариум|рыбк/,answer:'Если шкаф или тумба с аквариумом сломались, не пытайся удерживать тяжёлую конструкцию. Отойди и позови взрослого. Если вода попала к розеткам или оборудованию, ничего мокрого не трогай: взрослому нужно безопасно отключить питание. Аквариум следует переносить только после оценки устойчивости и веса; для него нужна подходящая прочная подставка.'},
+ {name:'вода и кран',thing:/кран|смесител|труб|шланг|водопровод/,problem:/течет|льет|протек|сломал|сломалс|затоп|сорвал/,answer:'Если из крана или трубы льётся вода, позови взрослого и попроси перекрыть воду штатным вентилем, если к нему можно безопасно добраться. Убери вещи от воды, но не подходи к мокрым розеткам и электроприборам. Если течь сильная или вода у соседей, нужна аварийная сантехническая служба. Не разбирай трубу под давлением.'},
+ {name:'стекло',thing:/окно|стекл|зеркал|ваза|банка|стакан/,problem:/разбил|разбит|треснул|лопнул|осколк/,answer:'Если разбилось стекло, не наступай на осколки и не собирай их руками. Отведи детей и животных, позови взрослого. Для уборки нужны подходящие защитные средства; мелкие осколки могут оставаться незаметными. Если это окно или большое стекло, лучше обратиться к специалисту.'},
+ {name:'телефон',thing:/телефон|смартфон|айфон|ipad|айпад|планшет/,problem:/не включ|не работа|завис|сломал|разбил|заряжа|нагрева|перегрева/,answer:'Если устройство не работает, сначала уточни симптом: не включается, не заряжается, зависает или повреждён экран. Попробуй штатную перезагрузку и проверь исправный зарядный кабель без видимых повреждений. Если устройство намокло, сильно нагрелось, вздулось или пахнет необычно, прекрати использование и попроси взрослого обратиться в сервис. Не разбирай аккумулятор.'},
+ {name:'компьютер',thing:/компьютер|ноутбук|пк|монитор/,problem:/не включ|не работа|завис|сломал|тормоз|лаг|перегрев/,answer:'Для начала проверь, есть ли питание и включается ли экран. Если компьютер завис, сохрани данные, когда это возможно, и перезагрузи штатным способом. Если он перегревается, шумит необычно или пахнет горелым, выключи и обратись за помощью. Уточни, что именно происходит и есть ли сообщение об ошибке.'},
+ {name:'интернет',thing:/интернет|wifi|wi fi|вай фай|роутер|маршрутизатор/,problem:/не работа|пропал|отключ|нет|сломал|медлен/,answer:'Если пропал интернет, проверь, подключено ли устройство к нужной сети, и работает ли связь на другом устройстве. Можно перезапустить роутер штатной кнопкой или с помощью взрослого. Если проблема на всех устройствах, возможно, сбой у провайдера. Не сбрасывай настройки роутера без необходимости.'},
+ {name:'дверь',thing:/двер|замок|ключ/,problem:/заклин|не откры|сломал|застрял|не закры/,answer:'Если дверь или замок заклинило, не применяй силу: можно повредить механизм. Проверь, не мешает ли что-то двери, и позови взрослого. Если человек заперт внутри и есть опасность, обратись за экстренной помощью. Для сломанного замка нужен мастер.'},
+ {name:'холодильник',thing:/холодильник|морозилк/,problem:/не холод|не мороз|не работа|сломал|течет/,answer:'Если холодильник перестал охлаждать, проверь с взрослым, закрыта ли дверца и есть ли питание. Не открывай его без необходимости. Если продукты стали тёплыми, их безопасность нужно оценить отдельно. При необычном запахе, искрении или повреждённом проводе не используй прибор и обратись к специалисту.'},
+ {name:'стиральная машина',thing:/стирал|посудомоечн|машинк/,problem:/не работа|течет|сломал|не слива|затоп/,answer:'Если машина протекает или не работает, останови программу штатной кнопкой и позови взрослого. Не трогай мокрые розетки и вилки. Взрослому стоит проверить инструкцию, подачу воды и слив; при сильной течи нужна помощь специалиста.'},
+ {name:'электричество',thing:/розетк|провод|удлинител|электрич|выключател/,problem:/искрит|дым|горит|сломал|не работа|ударил|коротк/,answer:'Если розетка, провод или выключатель искрит, дымит или повреждён, не трогай его и не пытайся чинить. Отойди и немедленно сообщи взрослому. Если есть дым или пожар, покинь опасное место и вызови экстренную помощь. Проверку электропроводки должен проводить специалист.'},
+ {name:'лампа',thing:/ламп|лампоч|светильник|люстр/,problem:/не горит|перегор|не работа|сломал|погас/,answer:'Если лампа не горит, возможно, перегорела лампочка или нет питания. Выключи свет и попроси взрослого проверить и заменить лампу подходящего типа. Не трогай повреждённые провода или патрон. Если новая лампа тоже не работает, нужен электрик.'},
+ {name:'игра',thing:/игр|garrys|гаррис|мод|minecraft|майнкрафт|roblox|роблокс/,problem:/не запуска|вылет|ошибк|лага|тормоз|не работа|завис/,answer:'Если игра не запускается или работает с ошибками, сначала перезапусти её и проверь, достаточно ли свободной памяти. Если установлены моды, проверь, не возникла ли ошибка после одного из них. Сохрани данные перед изменениями. Напиши название игры, устройство и точный текст ошибки — тогда можно предложить более конкретные шаги.'},
+ {name:'террариум',thing:/террариум|агам|ящериц|рептили/,problem:/разбил|сломал|не работа|ламп|треснул/,answer:'Если повредился террариум или оборудование, сначала обеспечь животному безопасное место и стабильную подходящую температуру. Не используй треснувшее стекло или повреждённые электроприборы. Попроси взрослого помочь с заменой оборудования; при изменении поведения или состояния животного нужна консультация ветеринара по рептилиям.'},
+ {name:'велосипед',thing:/велосипед|самокат|колес|тормоз/,problem:/сломал|не работа|спустил|прокол|скрип|отвалил/,answer:'Если у велосипеда или самоката неисправны тормоза, колёса или крепления, не катайся до ремонта. Попроси взрослого проверить состояние и обратиться в мастерскую. Уточни, какая часть сломалась и что произошло.'},
+ {name:'мебель',thing:/шкаф|полк|тумб|стол|стул|кровать/,problem:/сломал|упал|обвал|треснул|шатает|сломалс/,answer:'Если мебель сломалась или стала неустойчивой, не нагружай её и не пытайся удерживать тяжёлые части. Отойди, убери людей и животных из опасной зоны и позови взрослого. Особенно осторожно с мебелью, на которой стоят тяжёлые предметы или аквариум. Перед использованием нужны надёжный ремонт или замена.'},
+ {name:'пролитая вода',thing:/вода|жидкост|залил|пролил/,problem:/пролил|разлил|затоп|попал|протек/,answer:'Если пролилась вода, сначала проверь, нет ли рядом электрических приборов, розеток и проводов. Если есть, не прикасайся к мокрым предметам и позови взрослого. В безопасном месте можно убрать воду и высушить поверхность. Если вода попала внутрь устройства, не включай его до проверки.'},
+ {name:'животное',thing:/кот|кошк|собак|питомец|животн|рыбк|хомяк/,problem:/не ест|не пьет|боле|вял|упал|поран|не двига/,answer:'Если питомец резко изменил поведение, перестал есть, стал вялым или получил травму, сообщи взрослому и свяжись с ветеринаром. Обеспечь спокойную безопасную обстановку и не давай лекарства без назначения. Уточни вид животного, возраст и симптомы.'},
+ {name:'потеря предмета',thing:/ключ|телефон|вещ|рюкзак|кошелек|документ/,problem:/потерял|пропал|забыл|не могу найти/,answer:'Вспомни, где предмет был в последний раз, и проверь маршрут по порядку. Спроси у людей, которые могли его видеть. Если пропали ключи, документы или телефон, сообщи взрослому; при необходимости стоит защитить доступ к аккаунтам и обратиться в бюро находок.'}
+];
+function scenarioReply(text){
+ const q=normalizeQuestion(text);
+ for(const rule of TROUBLESHOOTING_RULES){if(rule.thing.test(q)&&rule.problem.test(q))return rule.answer;}
+ return null;
+}
+
+function knowledgeReply(text,thoughtful=false){
+ const q=normalizeQuestion(text);
+ const scenario=scenarioReply(q);
+ if(scenario)return scenario;
+ const electrical=lampAnswer(q);
+ if(electrical)return electrical;
+ if(!q)return 'Напиши вопрос, и я постараюсь помочь.';
+ const health=everydayHealthReply(q,thoughtful);
+ if(health)return health;
+ const specific=solveStructured(q);
+ if(specific)return specific;
+ const math=calculate(q);
+ if(math)return math;
+ if(/^(привет|здравствуй|добрый день|добрый вечер)[!. ]*$/i.test(q))return 'Привет! Я Abyshka.ai. Спроси меня о науке, математике, программировании, истории, играх или рисовании.';
+ if(/^(кто ты|что ты умеешь)[?.! ]*$/i.test(q))return `Я Abyshka.ai — офлайн-помощник со справочником из ${KNOWLEDGE.length} тем. Могу объяснять знакомые темы, помогать с простыми задачами, рисовать и составлять планы поездок.`;
+ if(/^(?:кто такой|кто такая|кто был|кто такая была)\b/.test(q)){const person=q.replace(/^(?:кто такой|кто такая|кто был|кто такая была)\s*/, '').trim();return `Ты спрашиваешь о «${person.slice(0,100)}». Чтобы не перепутать человека или персонажа, мне нужно точное имя или название произведения. Встроенный офлайн-справочник не содержит сведений обо всех людях и героях.`;}
+ if(/(сравни|разница между|чем отличается|что лучше)/i.test(q)){
+  const matches=kbSearch(q);
+  const different=[];const seen=new Set();
+  for(const m of matches){if(!seen.has(m.item.answer)){different.push(m.item);seen.add(m.item.answer)}if(different.length===2)break}
+  if(different.length===2){return `Сравним два понятия.\n\n1. ${different[0].answer}\n\n2. ${different[1].answer}\n\nГлавное: это разные идеи, поэтому сравнивай их по назначению, принципу работы и примерам.`;}
+ }
+ // Вопрос о поломке, происшествии или действиях не должен получать определение
+ // из справочника по одному похожему слову.
+ if(/(?:что делать|как поступить|как исправить|почему не|не работает|сломал|сломался|сломалась|течет|льет|протекает|перестал|перестала|не включается|не открывается)/.test(q)){
+  if(/(?:кран|смесител|труб|водопровод)/.test(q)&&/(?:вод|теч|льет|протек|слом)/.test(q))
+   return 'Если из сломанного крана течёт вода, сообщи взрослому и по возможности попроси перекрыть подачу воды штатным вентилем. Убери электрические приборы подальше от воды, не разбирай трубы под давлением. Если вода быстро заливает помещение, обратитесь в аварийную службу или к сантехнику. Уточни: вода течёт из носика или из-под крана?';
+  return 'Я понял, что вопрос о проблеме: «'+q.slice(0,125)+'». Пока нет достаточно точной инструкции для этого случая. Если что-то сломалось, не используй повреждённую вещь, особенно рядом с электричеством, водой или стеклом. Уточни, что именно повреждено и что происходит сейчас — я помогу выбрать следующие шаги.';
+ }
+ const chunks=q.split(/(?:[?!]+\s+|;\s+|\n+)/).map(s=>s.trim()).filter(Boolean).slice(0,5);
+ const answers=[];
+ const used=new Set();
+ for(const chunk of chunks){
+  const matches=kbSearch(chunk).filter(r=>!used.has(r.item.answer));
+  if(!matches.length)continue;
+  const first=matches[0];
+  let relevant=matches.filter(r=>r.score>=Math.max(9,first.score*.69)).slice(0,thoughtful?3:2);
+  // Avoid echoing one-word accidental matches from unrelated topics.
+  if(relevant.length>1 && relevant[1].score < first.score*.72) relevant=relevant.slice(0,1);
+  for(const hit of relevant){
+   const entry=hit.item;
+   if(used.has(entry.answer))continue;
+   used.add(entry.answer);
+   let part=(answers.length?'Связанная тема — ':'')+entry.answer;
+   if(config.answerSize==='full'||thoughtful)part+='\nПример: '+entry.example;
+   answers.push(part);
+   if(answers.length>=(thoughtful?5:3))break;
+  }
+ }
+ if(answers.length){
+  let intro='';
+  if(/почему|из-за чего|причин/i.test(q))intro='Чтобы понять причину, важно знать следующее:\n\n';
+  else if(/как|объясни|по шагам/i.test(q))intro='Разберём по порядку:\n\n';
+  else if(answers.length>1)intro='По вопросу подходят несколько идей:\n\n';
+  return intro+answers.map((a,i)=>answers.length>1?`${i+1}. ${a}`:a).join('\n\n');
+ }
+ if(/придумай|создай|идея|название|сюжет|персонаж/i.test(q)){
+  const theme=q.replace(/^(придумай|создай|дай идею)\s*/i,'').slice(0,115);
+  return `Вот творческая идея по теме «${theme}».\n\nОснова: возьми знакомый объект и добавь ему неожиданное свойство.\nОсобенность: пусть это свойство меняет поведение персонажа или правила мира.\nРазвитие: придумай три ситуации, в которых идея раскрывается по-новому.\n\nЕсли напишешь жанр и желаемую атмосферу, я смогу сделать конкретнее.`;
+ }
+ if(/как (сделать|создать|настроить|исправить|написать)|помоги|не работает|ошибка|сломал/i.test(q)){
+  return `Попробуем разобраться с задачей «${q.slice(0,110)}».\n\n1. Определи, какой результат нужен.\n2. Проверь, на каком шаге возникает трудность.\n3. Измени одну настройку или один небольшой участок кода за раз.\n4. Проверь результат и сохрани работающую версию.\n\nЧтобы я дала точные действия, напиши название программы и что именно не получилось. Пока у меня недостаточно данных о конкретном случае.`;
+ }
+ if(/что такое|кто такой|что значит|расскажи о|что известно/i.test(q)){
+  return `По запросу «${q.slice(0,120)}» у меня нет достаточно точных сведений в сохранённой офлайн-базе. Я не буду придумывать определение. Могу объяснить более общую связанную тему, если назовёшь её, или использовать подключённую языковую модель в настройках ⚙.`;
+ }
+ // Не повторяем одинаковое сообщение об отказе: поддерживаем диалог и разбираем намерение.
+ if(/(?:что делать|помоги|совет|как поступить)/.test(q)){
+  return `Давай разберём ситуацию: «${q.slice(0,140)}».\n\nСначала оцени, что происходит сейчас и есть ли что-то срочное. Затем выдели возможные причины и выбери самый безопасный первый шаг. Если вопрос о здоровье, важно учитывать симптомы и возраст, а при тревожных признаках обращаться к врачу.\n\nНапиши, что уже произошло, как давно и чего хочешь добиться — я предложу более конкретный план.`;
+ }
+ if(/(?:сколько|какой|какая|когда|где|кто)/.test(q)){
+  return `Я хочу ответить на вопрос «${q.slice(0,140)}» точно, а не придумать число, дату или факт.\n\nВ моей офлайн-базе пока нет проверенных данных именно для такого запроса. Можешь указать страну, год, название или другие важные детали. Для актуальных и узкоспециальных сведений потребуется подключённая модель или проверка источника.`;
+ }
+ return `Давай уточним вопрос «${q.slice(0,130)}». Я могу предложить объяснение, план по шагам или пример, но не хочу придумывать факты, которых нет в моей офлайн-базе. Напиши, что именно хочешь узнать или какой результат нужен.`;
+}
+function offlineReply(text){return knowledgeReply(text,false)}
+function thoughtfulOfflineReply(text){return knowledgeReply(text,true)}
+
+function parseTrip(text){
+  const lower=text.toLowerCase();
+  let destination='неизвестное место';
+  const m1=text.match(/(?:поездк[ауы]?|путешестви[ея]|маршрут)?\s*(?:в|во|на|до)\s+([A-Za-zА-Яа-яЁё\- ]{2,40}?)(?=(?:\s+на\s+\d|\s+на\s+выход|\s*,|$))/i);
+  const m2=text.match(/(?:в|во|на|до)\s+([A-Za-zА-Яа-яЁё\- ]{2,40})/i);
+  if(m1) destination=m1[1].trim(); else if(m2) destination=m2[1].trim();
+  let days=3;
+  const dm=text.match(/(\d+)\s*(?:дн|дня|дней|сут)/i);
+  if(dm) days=Math.min(14,Math.max(1,parseInt(dm[1],10)));
+  else if(/выходн/i.test(lower)) days=2;
+  else if(/недел/i.test(lower)) days=7;
+  let transport='поезд или самолёт';
+  if(/машин|авто/i.test(lower)) transport='машина';
+  else if(/самолет|самолёт/i.test(lower)) transport='самолёт';
+  else if(/поезд/i.test(lower)) transport='поезд';
+  else if(/автобус/i.test(lower)) transport='автобус';
+  const prefs=[];
+  if(/музе|истори/i.test(lower)) prefs.push('музеи');
+  if(/еда|кухн|кафе|ресторан/i.test(lower)) prefs.push('вкусная еда');
+  if(/дешев|эконом|недорог/i.test(lower)) prefs.push('экономно');
+  if(/дет|семь/i.test(lower)) prefs.push('с семьёй');
+  if(/природ|лес|горы|поход/i.test(lower)) prefs.push('природа');
+  if(/пляж|море/i.test(lower)) prefs.push('море');
+  if(/шопинг|магазин/i.test(lower)) prefs.push('шопинг');
+  if(!prefs.length) prefs.push('смешанный отдых');
+  return {destination,days,transport,prefs};
+}
+
+function hotelSearchLinks(h){
+ const query=h.destination+' отели '+(h.stars?h.stars+' звезд ':'')+(h.budgetLabel==='Экономный'?'недорогие ':h.budgetLabel==='Премиум'?'премиум ':'');
+ const google='https://www.google.com/travel/hotels?q='+encodeURIComponent(query);
+ const booking=new URL('https://www.booking.com/searchresults.html');
+ booking.searchParams.set('ss',h.destination);
+ if(h.checkin&&h.checkout&&h.checkout>h.checkin){booking.searchParams.set('checkin',h.checkin);booking.searchParams.set('checkout',h.checkout)}
+ booking.searchParams.set('group_adults',String(h.guests));booking.searchParams.set('no_rooms','1');
+ return [{label:'🔎 Google Hotels',url:google},{label:'🏨 Booking.com',url:booking.toString()}];
+}
+function tripHotelDetails(text,info){
+ const dest=$('tripDestination').value.trim()||info.destination;
+ const stars=Number($('hotelStars').value)||Number((text.match(/([345])\s*(?:зв[её]зд|★)/i)||[])[1])||0;
+ const budget=$('hotelBudget').value;
+ const labels={budget:'Экономный',mid:'Средний',luxury:'Премиум'};
+ return {destination:dest,stars,checkin:$('hotelCheckin').value,checkout:$('hotelCheckout').value,guests:Math.min(12,Math.max(1,Number($('hotelGuests').value)||2)),budgetLabel:labels[budget]||'Любой'};
+}
+function hotelIllustration(stars){
+  // Embedded SVG keeps the visual cards usable without a network connection.
+  // These images depict generic hotel types, never a real hotel.
+  const palettes={3:['#253e6c','#96b9de','#f1d7a3','#3c6890'],4:['#182f57','#6a9bd0','#d8eafa','#31577b'],5:['#1d183f','#8b66a0','#ffdda1','#59426d']};
+  const c=palettes[stars]||palettes[4];
+  const windows=Array.from({length:20},(_,i)=>{const x=146+(i%5)*30,y=92+Math.floor(i/5)*30;return `<rect x="${x}" y="${y}" width="13" height="17" rx="2" fill="${c[2]}" opacity=".86"/>`}).join('');
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 238" role="img" aria-label="Иллюстрация гостиницы">
+  <defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="${c[0]}"/><stop offset="1" stop-color="${c[1]}"/></linearGradient><linearGradient id="wall" x2="1" y2="1"><stop stop-color="${c[3]}"/><stop offset="1" stop-color="${c[0]}"/></linearGradient></defs>
+  <rect width="420" height="238" fill="url(#sky)"/><circle cx="341" cy="49" r="23" fill="${c[2]}" opacity=".86"/><path d="M0 188 Q90 164 188 190 T420 177V238H0Z" fill="${c[0]}" opacity=".6"/>
+  <rect x="116" y="65" width="197" height="141" rx="8" fill="url(#wall)" stroke="#fff" stroke-opacity=".22" stroke-width="3"/><rect x="133" y="48" width="165" height="20" rx="3" fill="${c[0]}"/>
+  ${windows}<rect x="211" y="168" width="40" height="38" rx="3" fill="${c[2]}" opacity=".8"/><rect x="224" y="172" width="15" height="34" fill="${c[0]}" opacity=".7"/>
+  <path d="M0 208H420V238H0Z" fill="#16243c"/><path d="M98 208H328" stroke="#f1ddbb" stroke-width="4" opacity=".65"/>
+  <text x="26" y="41" fill="#fff" font-family="Arial,sans-serif" font-weight="bold" font-size="18">${stars} STAR HOTEL</text>
+  </svg>`;
+  return 'data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(svg);
+}
+function hotelCategories(h){
+ const budget=h.budgetLabel||'Любой';
+ const profiles=[
+ {stars:3,name:'Практичный отель 3 ★',desc:'Обычно базовый комфорт: отдельный номер, собственная ванная, Wi-Fi; завтраки и условия зависят от гостиницы.',best:'Подойдёт, если главное — прогулки по городу и экономия.'},
+ {stars:4,name:'Комфортный отель 4 ★',desc:'Чаще предлагаются более просторные номера и дополнительные услуги. Проверь отзывы о чистоте, тишине, расположении и завтраке.',best:'Хороший баланс для большинства поездок.'},
+ {stars:5,name:'Премиальный отель 5 ★',desc:'Обычно больше услуг и пространства, но ценник выше. Проверь, включены ли питание, парковка и сборы.',best:'Вариант, когда важнее сервис и удобства, чем экономия.'}
+ ];
+ let recommended=h.selectedStars|| (h.stars===5?5:h.stars===4?4:budget==='Экономный'?3:budget==='Премиум'?5:4);
+ return {profiles:profiles.filter(x=>!h.stars||x.stars>=h.stars),recommended};
+}
+function hotelAdvice(h){
+ const {profiles,recommended}=hotelCategories(h);
+ const chosen=profiles.find(x=>x.stars===recommended)||profiles[0];
+ if(!chosen)return 'Уточни желаемую категорию отеля.';
+ return '🏨 Для поездки в '+h.destination+(h.selectedStars?' ты выбрал категорию «':' я бы начала с категории «')+chosen.name+'». '+chosen.best+'\n\n'+
+ 'Почему: '+(h.budgetLabel==='Экономный'?'ты выбрал экономный бюджет.':h.budgetLabel==='Премиум'?'ты выбрал премиальный бюджет.':'важно сравнить цену и комфорт.')+'\n'+
+ 'Перед бронированием сравни реальные отели по расположению, свежим отзывам, стоимости за весь срок и условиям отмены. Это совет по типу гостиницы, а не оценка конкретного отеля: живых данных у офлайн-версии нет.';
+}
+function latestHotelPlan(c){for(let i=c.messages.length-1;i>=0;i--){if(c.messages[i].trip?.hotel)return c.messages[i].trip.hotel}return null}
+function asksHotelAdvice(text){return /(?:какой|какую|какие|куда|в какой|выбр|посовет|рекоменду|лучше|описан|расскажи|сравни|подойд|отел|гостиниц)/i.test(text)&&/(?:отел|гостиниц|жиль|засел|номер|поехать|выбр|рекоменду|посовет|лучше|сравни)/i.test(text)}
+function buildTripPlan(text){
+  const info=parseTrip(text);
+  const hotel=tripHotelDetails(text,info);
+  if(hotel.destination!=='неизвестное место') info.destination=hotel.destination;
+  const tags=['📍 '+info.destination,'⏳ '+info.days+' дн.','🚗/✈️ '+info.transport].concat(info.prefs.map(p=>'✨ '+p));
+  const prep=[
+    'Проверь документы, деньги, зарядки и способ оплаты.',
+    'Сохрани офлайн-карту и адрес проживания.',
+    'Продумай 2–3 главные цели поездки, чтобы не перегружать маршрут.',
+    'Оставь свободное время на отдых и непредвиденные изменения.'
+  ];
+  const templates={
+    culture:['Неспешная прогулка по центру и знакомство с районом.','Посещение главного музея или исторического места.','Вечером — местная кухня и спокойная прогулка.'],
+    nature:['Утром — маршрут по красивому природному месту.','Днём — смотровая площадка, парк или вода.','Вечером — отдых и короткая прогулка рядом с жильём.'],
+    family:['Выбери 1 основную активность без спешки.','После обеда оставь время на отдых и еду.','К вечеру — лёгкая прогулка и раннее возвращение.'],
+    budget:['Бери 1–2 главные точки в день, а остальное делай пешком.','Ищи комплексные билеты и обеденные предложения.','Планируй еду и транспорт заранее, чтобы не переплачивать.']
+  };
+  let style='culture';
+  if(info.prefs.includes('природа')||info.prefs.includes('море')) style='nature';
+  else if(info.prefs.includes('с семьёй')) style='family';
+  else if(info.prefs.includes('экономно')) style='budget';
+  const dayPlans=[];
+  for(let i=1;i<=info.days;i++){
+    const items=[];
+    if(i===1){
+      items.push('Приезд в '+info.destination+', заселение и знакомство с окрестностями.');
+      items.push(templates[style][0]);
+      items.push('Сделай лёгкий день без сильной нагрузки, чтобы спокойно войти в ритм.');
+    }else if(i===info.days){
+      items.push('Утром — короткая прогулка или финальная точка маршрута.');
+      items.push('Покупка сувениров, сбор вещей и проверка документов перед выездом.');
+      items.push('Выезд обратно без спешки, оставь запас времени на дорогу.');
+    }else{
+      items.push(templates[style][1]);
+      items.push(templates[style][2]);
+      if(info.prefs.includes('вкусная еда')) items.push('Выдели отдельное время на кафе или ресторан с местной кухней.');
+      if(info.prefs.includes('шопинг')) items.push('Добавь 1 район или улицу для магазинов и прогулки.');
+      if(info.prefs.includes('музеи') && !items.some(x=>/музе/i.test(x))) items.push('Добавь ещё один музей или красивую историческую локацию.');
+    }
+    dayPlans.push({title:'День '+i,items});
+  }
+  const pack=['Документы и деньги/карта','Телефон, зарядка, пауэрбанк','Удобная обувь и одежда по погоде','Вода и мелкие перекусы в дорогу'];
+  if(info.transport==='машина') pack.push('Права, документы на авто, держатель для телефона');
+  if(info.prefs.includes('с семьёй')) pack.push('Запасные вещи и маленькие развлечения для детей');
+  if(info.prefs.includes('природа')) pack.push('Лёгкая куртка, салфетки, маленькая аптечка');
+  const budget=[
+    {name:'Транспорт',value: info.transport==='машина' ? 'бензин + парковка' : info.transport+' туда-обратно'},
+    {name:'Жильё',value:'сравни 2–3 варианта и выбери ближе к центру или маршруту'},
+    {name:'Еда',value: info.prefs.includes('экономно') ? 'ориентируйся на недорогие кафе и магазины' : '1–2 хороших приёма пищи в день'},
+    {name:'Активности',value: info.prefs.includes('музеи') ? 'музеи / билеты / экскурсии' : 'прогулки, парки, основные точки'}
+  ];
+  return {
+    meta:'План поездки в '+info.destination+' на '+info.days+' дн. • предпочтения: '+info.prefs.join(', ')+'.',
+    tags, prep, days:dayPlans, pack, budget, hotel,
+    text:'🧳 Готово! Я составила офлайн-план поездки в '+info.destination+'.'
+  };
+}
+
+function artGenerator(prompt){
+  const text=prompt.toLowerCase();
+  const canvas=document.createElement('canvas');
+  canvas.width=1024; canvas.height=1024;
+  const x=canvas.getContext('2d');
+  const rnd=(a=1)=>Math.random()*a;
+  const pick=a=>a[Math.floor(Math.random()*a.length)];
+  const night=/ноч|звезд|луна|космос/i.test(text);
+  const sunset=/закат|оранж|вечер/i.test(text);
+  const winter=/зим|снег/i.test(text);
+  const sea=/море|океан|пляж|волна/i.test(text);
+  const forest=/лес|дерев|природ|поляна/i.test(text);
+  const city=/город|улиц|неон|дом|небоскреб/i.test(text);
+  const space=/космос|галакт|планет|звезд/i.test(text);
+  const horror=/страш|хоррор|жутк|монстр/i.test(text);
+  const cute=/мил|красив|cute/i.test(text);
+  const magical=/маг|волшеб|сказ/i.test(text);
+  let subject='cat';
+  if(/собак/i.test(text)) subject='dog';
+  else if(/робот/i.test(text)) subject='robot';
+  else if(/машин|авто/i.test(text)) subject='car';
+  else if(/дом|замок/i.test(text)) subject='house';
+  else if(/цвет/i.test(text)) subject='flower';
+  else if(/ракет/i.test(text)) subject='rocket';
+  else if(/птиц/i.test(text)) subject='bird';
+  else if(/дерев/i.test(text)) subject='tree';
+  else if(/дракон/i.test(text)) subject='dragon';
+  else if(/монстр/i.test(text)) subject='monster';
+
+  function circle(cx,cy,r,c,a=1){x.save();x.globalAlpha=a;x.fillStyle=c;x.beginPath();x.arc(cx,cy,r,0,Math.PI*2);x.fill();x.restore()}
+  function ellipse(cx,cy,rx,ry,c,a=1,rot=0){x.save();x.translate(cx,cy);x.rotate(rot);x.scale(rx,ry);x.globalAlpha=a;x.fillStyle=c;x.beginPath();x.arc(0,0,1,0,Math.PI*2);x.fill();x.restore()}
+  function rect(px,py,w,h,c,a=1,r=0){x.save();x.globalAlpha=a;x.fillStyle=c;if(!r)x.fillRect(px,py,w,h);else{const rr=Math.min(r,w/2,h/2);x.beginPath();x.moveTo(px+rr,py);x.arcTo(px+w,py,px+w,py+h,rr);x.arcTo(px+w,py+h,px,py+h,rr);x.arcTo(px,py+h,px,py,rr);x.arcTo(px,py,px+w,py,rr);x.closePath();x.fill()}x.restore()}
+  function poly(points,c,a=1){x.save();x.globalAlpha=a;x.fillStyle=c;x.beginPath();x.moveTo(points[0][0],points[0][1]);for(let i=1;i<points.length;i++)x.lineTo(points[i][0],points[i][1]);x.closePath();x.fill();x.restore()}
+  function line(ax,ay,bx,by,c,w,a=1){x.save();x.globalAlpha=a;x.strokeStyle=c;x.lineWidth=w;x.lineCap='round';x.beginPath();x.moveTo(ax,ay);x.lineTo(bx,by);x.stroke();x.restore()}
+  function glow(cx,cy,r,c,a=.45){const g=x.createRadialGradient(cx,cy,0,cx,cy,r);g.addColorStop(0,c);g.addColorStop(1,'transparent');x.save();x.globalAlpha=a;x.fillStyle=g;x.beginPath();x.arc(cx,cy,r,0,Math.PI*2);x.fill();x.restore()}
+
+  let sky1='#a5d7ff', sky2='#f7c9b8';
+  if(night){sky1=space?'#090d22':'#112147'; sky2='#2f3b7d';}
+  if(sunset){sky1='#ff9f61'; sky2='#73349d';}
+  if(winter){sky1='#9fc6e8'; sky2='#dbeaf8';}
+  if(horror){sky1='#2a233b'; sky2='#0f151c';}
+  const grad=x.createLinearGradient(0,0,0,1024); grad.addColorStop(0,sky1); grad.addColorStop(1,sky2); x.fillStyle=grad; x.fillRect(0,0,1024,1024);
+
+  if(space||night){
+    for(let i=0;i<220;i++) circle(rnd(1024),rnd(550),rnd(2.6)+.4,'#fff',.35+rnd(.65));
+    for(let i=0;i<30;i++) glow(rnd(1024),rnd(520),rnd(10)+10,'#ffffff',.12);
+  }
+  if(night&&!space){circle(820,170,62,'#f8f2c0',.95);glow(820,170,130,'#fff2b2',.28)}
+  if(space){circle(835,175,80,'#c7d3ff',.85);circle(822,166,67,'#7a88d8',.25);glow(835,175,170,'#89a2ff',.22)}
+  if(sunset){circle(810,210,76,'#fff0af',.95);glow(810,210,180,'#ffd48f',.26)}
+
+  if(sea){
+    const wg=x.createLinearGradient(0,560,0,1024); wg.addColorStop(0,'#4bb5d8'); wg.addColorStop(1,'#134b71'); x.fillStyle=wg; x.fillRect(0,560,1024,464);
+    for(let i=0;i<14;i++) line(0,620+i*24,1024,605+i*24,'rgba(255,255,255,.16)',2+rnd(2),.7);
+    circle(820,610,120,'#ffffff',.05);
+  } else if(city){
+    rect(0,640,1024,384,horror?'#131a25':'#1c2a3d');
+    for(let i=0;i<12;i++){
+      const w=55+rnd(70), h=150+rnd(290), px=i*90+rnd(18);
+      rect(px,640-h,w,h,pick(horror?['#15111f','#261b34','#1b222d']:['#213246','#283b57','#19293d']));
+      for(let yy=0;yy<h-20;yy+=24) for(let xx=0;xx<w-16;xx+=18) if(Math.random()>.35) rect(px+8+xx,646-h+8+yy,10,14,pick(['#ffd889','#b9d8ff','#ffb2f4']),.85,2);
+    }
+    rect(0,820,1024,204,horror?'#12161e':'#24354b');
+    line(0,870,1024,870,'rgba(255,255,255,.1)',6,.8);
+  } else if(forest){
+    rect(0,650,1024,374,winter?'#eaf3fa':'#2f5f49');
+    for(let i=0;i<18;i++){
+      const px=i*65+rnd(35); rect(px,485+rnd(80),16+rnd(10),220,'#6d4a38');
+      for(let k=0;k<5;k++) circle(px+rnd(80)-25,455+rnd(110),40+rnd(25),pick(winter?['#dfe8ef','#c9d9e4','#ffffff']:['#2f7e53','#448d62','#235f45']),.95);
+    }
+  } else {
+    if(winter){rect(0,680,1024,344,'#eef5fb'); for(let i=0;i<120;i++) circle(rnd(1024),560+rnd(450),2+rnd(4),'#fff',.7)}
+    else {rect(0,700,1024,324,horror?'#1c2630':'#4b8b5c');}
+    poly([[0,720],[170,520],[330,710]],winter?'#d6e8f7':'#637ea1',.95);
+    poly([[210,720],[470,455],[710,720]],winter?'#c6ddf0':'#576f94',.95);
+    poly([[500,720],[800,500],[1024,720]],winter?'#d9ebf8':'#4e6387',.95);
+  }
+
+  if(magical){for(let i=0;i<40;i++) glow(rnd(1024),320+rnd(450),10+rnd(26),pick(['#a4f4ff','#ffd4fb','#fff3a9']),.25)}
+  if(horror){rect(0,0,1024,1024,'#000',.16); for(let i=0;i<20;i++) line(rnd(1024),rnd(1024),rnd(1024),rnd(1024),'rgba(255,255,255,.03)',1,.4)}
+
+  const shadowY=810;
+  ellipse(512,shadowY+55,190,38,'#000',.18);
+
+  const mainColor = horror ? '#51416e' : cute ? pick(['#ffbeae','#f9d48a','#96d7ff','#c8b2ff']) : pick(['#78b7ff','#f29ab2','#f0c46a','#78d0ab','#c2a8ff']);
+  const accent = pick(['#ffffff','#ffe48a','#9fe7ff','#ffd2f2']);
+  const dark = '#27354c';
+
+  function drawCat(){
+    const ox=512, oy=520;
+    ellipse(ox,oy+110,170,155,mainColor);
+    ellipse(ox,oy-35,118,108,mainColor);
+    poly([[ox-83,oy-104],[ox-140,oy-220],[ox-34,oy-145]],mainColor);
+    poly([[ox+83,oy-104],[ox+140,oy-220],[ox+34,oy-145]],mainColor);
+    poly([[ox-86,oy-119],[ox-118,oy-193],[ox-52,oy-149]],'#ffd9ef',.85);
+    poly([[ox+86,oy-119],[ox+118,oy-193],[ox+52,oy-149]],'#ffd9ef',.85);
+    ellipse(ox-42,oy-48,26,34,'#fff'); ellipse(ox+42,oy-48,26,34,'#fff');
+    ellipse(ox-42,oy-44,11,18,dark); ellipse(ox+42,oy-44,11,18,dark);
+    ellipse(ox,oy+12,38,24,'#f7d8c3'); circle(ox,oy,9,'#5e4151');
+    for(let j=0;j<3;j++){line(ox-18,oy+14+j*10,ox-140,oy+4+j*16,'#f4efe7',4,.9);line(ox+18,oy+14+j*10,ox+140,oy+4+j*16,'#f4efe7',4,.9)}
+    for(const s of [-1,1]){ellipse(ox+s*96,oy+250,48,28,mainColor); line(ox+s*85,oy+140,ox+s*120,oy+205,mainColor,30)}
+    line(ox+150,oy+130,ox+238,oy+18,mainColor,24);
+    line(ox+238,oy+18,ox+208,oy-38,mainColor,18);
+    if(cute){glow(ox-70,oy-10,20,'#ffd1ea',.18);glow(ox+70,oy-10,20,'#ffd1ea',.18)}
+  }
+
+  function drawDog(){
+    const ox=512, oy=528;
+    ellipse(ox,oy+118,182,160,mainColor);
+    ellipse(ox,oy-18,124,112,mainColor);
+    ellipse(ox-118,oy-46,38,94,'#7d604f'); ellipse(ox+118,oy-46,38,94,'#7d604f');
+    ellipse(ox-44,oy-26,25,30,'#fff'); ellipse(ox+44,oy-26,25,30,'#fff');
+    ellipse(ox-42,oy-22,11,15,dark); ellipse(ox+42,oy-22,11,15,dark);
+    ellipse(ox,oy+38,62,42,'#f5dfd6'); circle(ox,oy+16,11,'#3f3234');
+    line(ox-18,oy+56,ox+18,oy+56,'#7b4e57',4,.6);
+    for(const s of [-1,1]){ellipse(ox+s*98,oy+256,50,28,mainColor); line(ox+s*88,oy+146,ox+s*116,oy+214,mainColor,31)}
+    line(ox+156,oy+106,ox+245,oy+40,mainColor,21);
+  }
+
+  function drawRobot(){
+    const ox=512, oy=520;
+    rect(ox-135,oy-88,270,300,mainColor,.98,22); rect(ox-120,oy-268,240,165,'#b7cae1',.98,22);
+    rect(ox-82,oy-215,58,50,'#2a3b64',1,10); rect(ox+26,oy-215,58,50,'#2a3b64',1,10);
+    rect(ox-70,oy-110,140,12,'#42628f',1,6); rect(ox-52,oy+10,104,84,'#314e76',1,14);
+    line(ox,oy-268,ox,oy-318,'#b7cae1',12); circle(ox,oy-335,18,'#ff9ac4'); glow(ox,oy-335,60,'#ff9ac4',.3);
+    for(const s of [-1,1]){rect(ox+s*160-25,oy-68,52,190,'#9db7d0',1,16); rect(ox+s*82-38,oy+232,78,118,'#9db7d0',1,16)}
+    for(let i=0;i<5;i++) rect(ox-65+i*28,oy+120,18,12,accent,.95,4);
+  }
+
+  function drawCar(){
+    const ox=512, oy=612;
+    rect(ox-260,oy-35,520,132,mainColor,1,26); poly([[ox-170,oy-40],[ox-70,oy-150],[ox+110,oy-150],[ox+215,oy-40]],mainColor);
+    poly([[ox-95,oy-58],[ox-45,oy-132],[ox+30,oy-132],[ox+30,oy-58]],'#bfe9ff'); poly([[ox+55,oy-58],[ox+55,oy-132],[ox+122,oy-132],[ox+170,oy-58]],'#bfe9ff');
+    for(const p of [ox-160,ox+160]){circle(p,oy+92,60,'#273244'); circle(p,oy+92,28,'#dde7f1')}
+    rect(ox-256,oy+3,52,24,'#fff0b1',.95,5); rect(ox+206,oy+3,50,24,'#ed7777',.95,5); glow(ox-230,oy+16,72,'#fff0b1',.16);
+  }
+
+  function drawHouse(){
+    const ox=512, oy=560;
+    rect(ox-185,oy-10,370,278,'#ebd1ae',1,18); poly([[ox-230,oy-5],[ox,oy-220],[ox+230,oy-5]],horror?'#5f3f53':'#ad626d');
+    rect(ox-36,oy+95,72,173,'#855f57',1,12); rect(ox-136,oy+22,90,90,'#a6def1',1,12); rect(ox+46,oy+22,90,90,'#a6def1',1,12);
+    line(ox-90,oy+22,ox-90,oy+112,'#fff',5); line(ox+91,oy+22,ox+91,oy+112,'#fff',5);
+    if(horror){circle(ox+115,oy+64,8,'#ff6e6e'); glow(ox+115,oy+64,36,'#ff6e6e',.2)}
+  }
+
+  function drawFlower(){
+    const ox=512, oy=540;
+    rect(ox-8,oy-30,16,290,'#409d66',1,8); ellipse(ox-90,oy+100,90,34,'#409d66'); ellipse(ox+90,oy+70,82,28,'#409d66');
+    for(let i=0;i<10;i++){const a=i*Math.PI*2/10; ellipse(ox+Math.cos(a)*88,oy-118+Math.sin(a)*88,54,70,mainColor,.95,a)}
+    circle(ox,oy-118,72,'#f6ce60'); glow(ox,oy-118,110,'#ffe09c',.2);
+  }
+
+  function drawRocket(){
+    const ox=512, oy=520;
+    poly([[ox,110],[ox-96,320],[ox+96,320]],'#f0f2f7'); rect(ox-92,320,184,340,'#e1e6ef',1,24);
+    rect(ox-54,570,36,132,'#aab4ca',1,12); rect(ox+18,570,36,132,'#aab4ca',1,12); circle(ox,410,54,'#68c0e6'); circle(ox,410,34,'#2f69b2');
+    poly([[ox-74,660],[ox-6,660],[ox-72,760]],'#f2b35a'); poly([[ox+74,660],[ox+6,660],[ox+72,760]],'#f2b35a'); poly([[ox-34,662],[ox+34,662],[ox,796]],'#ffb451'); glow(ox,812,95,'#ffb25f',.24);
+  }
+
+  function drawBird(){
+    const ox=512, oy=550;
+    ellipse(ox,oy,180,118,mainColor); circle(ox+130,oy-74,96,mainColor); poly([[ox+225,oy-64],[ox+345,oy-20],[ox+224,oy+8]],'#efb868');
+    circle(ox+148,oy-92,12,dark); poly([[ox-70,oy-5],[ox-255,oy-122],[ox-186,oy+82]],'#bdd1ec'); ellipse(ox-12,oy+30,100,54,'#edd7df');
+    for(let i=0;i<4;i++) line(ox+20+i*18,oy+98,ox+12+i*18,oy+164,dark,5);
+  }
+
+  function drawTree(){
+    const ox=512, oy=570;
+    rect(ox-48,oy-30,96,350,'#7c5540',1,18);
+    for(let i=0;i<12;i++) circle(ox-140+rnd(280),oy-160+rnd(220),68+rnd(28),pick(winter?['#edf5fb','#d9e8f4','#ffffff']:[mainColor,'#4fa16f','#2f875b']),.96);
+  }
+
+  function drawDragon(){
+    const ox=512, oy=560;
+    ellipse(ox-30,oy+55,210,140,mainColor); ellipse(ox+160,oy-15,90,70,mainColor);
+    poly([[ox-20,oy-10],[ox-170,oy-160],[ox-88,oy+10]],accent,.8); poly([[ox+36,oy-6],[ox+188,oy-170],[ox+108,oy+8]],accent,.8);
+    for(let i=0;i<7;i++) poly([[ox-108+i*35,oy-40],[ox-92+i*35,oy-132-rnd(28)],[ox-72+i*35,oy-38]],'#fff0b2',.85);
+    circle(ox+186,oy-28,11,dark); ellipse(ox+214,oy+10,54,30,'#f0d1cb');
+    line(ox-90,oy+120,ox-170,oy+210,mainColor,26); line(ox+12,oy+126,ox+90,oy+220,mainColor,26); line(ox-182,oy+60,ox-320,oy-34,mainColor,24);
+  }
+
+  function drawMonster(){
+    const ox=512, oy=520;
+    ellipse(ox,oy+110,190,170,mainColor); ellipse(ox,oy-45,122,116,mainColor); glow(ox,oy-32,110,'#8b6cff',.25);
+    for(let i=0;i<6;i++) poly([[ox-120+i*40,oy-110],[ox-105+i*40,oy-220-rnd(42)],[ox-88+i*40,oy-112]],'#6c59a3',.95);
+    ellipse(ox-44,oy-54,27,34,'#fff'); ellipse(ox+44,oy-54,27,34,'#fff'); ellipse(ox-42,oy-50,11,16,dark); ellipse(ox+42,oy-50,11,16,dark);
+    ellipse(ox,oy+30,80,44,'#4d2138');
+    for(let i=0;i<10;i++) poly([[ox-74+i*15,oy+16],[ox-66+i*15,oy-10-rnd(12)],[ox-58+i*15,oy+16]],'#f3e7d2');
+    for(const s of [-1,1]){line(ox+s*84,oy+146,ox+s*125,oy+230,mainColor,28); ellipse(ox+s*110,oy+268,50,29,mainColor)}
+  }
+
+  const drawer={cat:drawCat,dog:drawDog,robot:drawRobot,car:drawCar,house:drawHouse,flower:drawFlower,rocket:drawRocket,bird:drawBird,tree:drawTree,dragon:drawDragon,monster:drawMonster}[subject] || drawCat;
+  drawer();
+
+  if(cute){for(let i=0;i<18;i++) circle(240+rnd(540),140+rnd(620),3+rnd(6),pick(['#ffd2ec','#c7e9ff','#fff1a8']),.5)}
+
+  const vignette=x.createRadialGradient(512,460,240,512,512,640); vignette.addColorStop(0,'transparent'); vignette.addColorStop(1,'rgba(0,0,0,.18)'); x.fillStyle=vignette; x.fillRect(0,0,1024,1024);
+  x.strokeStyle='rgba(255,255,255,.16)'; x.lineWidth=8; x.strokeRect(14,14,996,996);
+  return canvas.toDataURL('image/jpeg',0.92);
+}
+
+
+// V8: дополнительные полезные ответы для открытых вопросов. Это локальные алгоритмы, не медицинская диагностика.
+function advancedHelp(text){
+ const q=normalizeQuestion(text);
+ const health=/(здоров|болит|боль|пульс|сердц|симптом|температур|кашел|зуб|глаз|травм|тошнот|рвот|давлен|сыпь|аллерг|дыш|бессонниц|нарушени.*сна|плох.*сплю|укус|палец|отек|отёк|судорог|головокруж|похуд|обморок|живот|диаре|лекарств|заболев|инфекц|грипп|простуд)/i.test(q);
+ if(health){
+  const specific=everydayHealthReply(q,true);
+  if(specific)return specific;
+  const things=[
+   [/сып|аллерг|крапивниц/, 'Сыпь бывает при раздражении кожи, аллергии, инфекциях и других состояниях. Не расчёсывай кожу, избегай нового раздражителя, запомни время появления. Если одновременно отекают губы или язык, трудно дышать либо появляется слабость — срочно вызывайте помощь.'],
+   [/тошнот|рвот|диаре/, 'Тошнота, рвота и диарея могут возникать при кишечных инфекциях и других причинах. Важнее всего не допускать обезвоживания: пей небольшими глотками, сообщи взрослому. При крови, сильной боли, выраженной слабости или невозможности пить требуется срочная оценка врача.'],
+   [/сон|бессонниц/, 'Проблемы со сном могут возникать из-за стресса, смены режима и обстановки. Старайся вставать примерно в одно время, уменьшить шум и яркий свет перед сном. Если проблема длится долго, обсуди это с врачом.'],
+   [/травм|ушиб|растяж|синяк/, 'После небольшой травмы обычно полезны покой и холод через ткань ненадолго. При деформации, сильной боли, потере чувствительности, нарастающем отёке или невозможности двигать конечностью нужна медицинская помощь.'],
+   [/дыш|одышк|задыха/, 'Затруднение дыхания может быть признаком неотложной ситуации. Если трудно дышать сейчас, появилась синюшность, боль в груди, спутанность или выраженная слабость, немедленно обратись за экстренной помощью и позови взрослого.'],
+   [/укус|ужал/, 'После укуса или ужаления промой место водой и наблюдай за реакцией. Если начинается затруднение дыхания, отёк языка/горла или сильная общая реакция — срочно вызывайте экстренную помощь.'],
+   [/лекарств|таблет|антибиотик/, 'Лекарства зависят от диагноза, возраста и других факторов. Не начинай лечение или не меняй дозу по ответу офлайн-помощника: уточни у врача или фармацевта. При подозрении на случайный приём опасной дозы нужна срочная помощь.']
+  ];
+  for(const [re,a] of things)if(re.test(q))return a+'\n\nРасскажи, сколько длится симптом, насколько он выражен и есть ли другие признаки — это поможет понять, насколько срочно обращаться за медицинской помощью.';
+  return 'Я могу объяснить возможные причины и общие безопасные шаги, но не ставлю диагноз по переписке. Оцени, когда началось, усиливается ли состояние и какие ещё есть симптомы. Если появились боль в груди, затруднение дыхания, потеря сознания, спутанность или внезапная сильная слабость — необходима экстренная медицинская помощь. Если вопрос о ребёнке или подростке, стоит сообщить взрослому и обратиться к врачу при ухудшении. Уточни симптом и как давно он возник.';
+ }
+ if(/(?:код|скрипт|программ|javascript|python|html|css|сайт|приложени|бота|ошибк|функци|алгоритм|разработ)/i.test(q)){
+  const wantsCode=/(?:напиши|создай|сделай|пример|покажи|код|функци|скрипт)/.test(q);
+  if(/python|питон/.test(q))return wantsCode ? 'Вот простой пример работающей программы на Python — поиск максимального числа:\n\n```python\ndef largest(numbers):\n    if not numbers:\n        return None\n    return max(numbers)\n\nprint(largest([2, 9, 4]))  # 9\n```\n\nЧтобы написать код под твою задачу, укажи, что программа должна делать, какие данные получает и какой результат ждёшь. Офлайн-режим умеет предлагать шаблоны, но не проверяет сложный код автоматически.' : 'Python удобен для скриптов и обработки данных. Для начала изучи переменные, функции, условия, циклы и списки.';
+  if(/html|css|сайт|кнопк|страниц/.test(q))return wantsCode ? "Мини-пример сайта с работающей кнопкой:\n\n```html\n<!doctype html>\n<meta charset=\"utf-8\">\n<button id=\"hello\">Нажми</button>\n<p id=\"result\"></p>\n<script>document.getElementById(\"hello\").onclick=()=>document.getElementById(\"result\").textContent=\"Привет!\"<\/script>\n```" : "HTML задаёт структуру, CSS отвечает за оформление, а JavaScript — за интерактивность.";
+  if(/javascript|js|функци|скрипт|бота/.test(q))return wantsCode ? 'Пример JavaScript: функция, которая убирает повторы из массива и сортирует числа:\n\n```javascript\nfunction uniqueSorted(numbers) {\n  return [...new Set(numbers)].sort((a,b) => a-b);\n}\nconsole.log(uniqueSorted([5,2,5,1])); // [1,2,5]\n```\n\nДля твоего проекта напиши точное действие, входные данные и ожидаемый результат. Код выше — пример, а не универсальное решение любой задачи.' : 'В JavaScript полезно освоить функции, массивы, события, async/await и работу с DOM.';
+  if(/ошибк|не работает|баг/.test(q))return 'Для исправления ошибки сначала сохрани копию проекта, затем попробуй воспроизвести проблему и посмотри сообщение об ошибке. Проверь значения переменных и обработчики событий. Пришли фрагмент кода и точный текст ошибки — я помогу разобраться. Без исходного кода нельзя безопасно угадать исправление.';
+  return 'Чтобы получить полезный код, укажи язык (HTML/JS/Python), входные данные и результат. Я могу дать рабочие примеры для стандартных задач, но полноценная разработка сложного проекта потребует более сильной модели или проверки программистом.';
+ }
+ return null;
+}
+
+const NOTE_FREQ=[261.63,293.66,329.63,349.23,392,440,493.88,523.25];
+let audioCtx=null,playingNodes=[],playingTimer=null,songBusy=false;
+function hashSong(text){let h=2166136261;for(const c of text){h^=c.charCodeAt(0);h=Math.imul(h,16777619)}return h>>>0}
+// Original lyrics from a short theme. They are displayed beside the instrumental demo.
+function originalSongLyrics(theme,version=1){
+ const raw=String(theme).split(/[.!?\n]/)[0].trim().slice(0,70);
+ const words=raw.replace(/^(напиши|создай|сделай)\s+(песню|музыку)\s*(про|о|об)?\s*/i,'').trim();
+ const subject=words||'далёких мечтах';
+ const last=version>1?'И музыка сильнее нас с тобой.':'И свет останется всегда со мной.';
+ return `Куплет 1\nТихо за окном мерцают огни,\nМы собираем мгновения, дни.\nИстория о ${subject},\nВедёт нас туда, где рождается свет.\n\nПрипев\nПусть звучит мелодия в сердце моём,\nВ каждом новом такте надежду найдём.\nСнова и снова мечта за мечтой,\n${last}\n\nКуплет 2\nКаждый рассвет начинает свой путь,\nГлавное — верить и не свернуть.\nСколько бы ни было новых дорог,\nМузыка рядом, и мир не далёк.${version>1?'\n\nФинальный припев\nПусть звучит мелодия в сердце моём,\nВ каждом новом такте надежду найдём.\nПесня летит над землёй голубой,\nИ новый рассвет остаётся с тобой.':''}`;
+}
+function composeSong(text){
+ const q=text.toLowerCase();
+ const style=/рок|гитар|энергич|быстр/i.test(q)?'Энергичная':/груст|печал|спокой|нежн|сон|медлен/i.test(q)?'Лирическая':/электрон|техно|танц|диско/i.test(q)?'Электронная':/страш|темн|мистич|хоррор/i.test(q)?'Таинственная':'Мечтательная';
+ const bpm=style==='Энергичная'?118:style==='Электронная'?124:style==='Лирическая'?76:style==='Таинственная'?82:98;
+ const seed=hashSong(text), title=(text.split(/[\n.!?]/)[0].replace(/^(песня|напиши песню|сделай песню|музыка)\s*[:\-]?\s*/i,'').trim()||'Моя композиция').slice(0,54);
+ return {title,lyrics:/\n/.test(text)?text:originalSongLyrics(text),prompt:text,style,bpm,duration:32,seed,version:1};
+}
+function improveSong(song){return {...song,version:song.version+1,lyrics:song.prompt&&!/\n/.test(song.prompt)?originalSongLyrics(song.prompt,song.version+1):song.lyrics,bpm:Math.max(65,Math.min(135,song.bpm+(song.version%2?-3:4))),duration:Math.min(72,40+(song.version-1)*8),seed:(song.seed+7919*song.version)>>>0}}
+function songEvents(song){
+ const ev=[],beat=60/song.bpm,barBeats=4,beats=Math.floor(song.duration/beat),seed=song.seed;
+ const minor=(song.style==='Лирическая'||song.style==='Таинственная');
+ const scale=minor?[0,2,3,5,7,8,10]:[0,2,4,5,7,9,11];
+ const roots=[0,5,3,4,0,3,5,4],shift=seed%8,detail=song.version;
+ function hz(step,oct=0){const index=((step%7)+7)%7;return 220*Math.pow(2,(shift+scale[index]+12*oct)/12)}
+ function add(at,dur,step,oct,vol,kind){ev.push({at,dur,f:hz(step,oct),vol,kind})}
+ for(let b=0;b<beats;b++){
+   const bar=Math.floor(b/4),beatInBar=b%4,root=roots[bar%roots.length],bridge=(bar%12>=8),chorus=(bar%8>=4);
+   if(beatInBar===0){
+     for(const chordStep of [0,2,4])add(b*beat,beat*3.85,root+chordStep,-1,bridge?.045:.065,'pad');
+     add(b*beat,beat*.92,root,-2,.13,'bass');
+   }
+   if(beatInBar===2)add(b*beat,beat*.86,root+4,-2,.1,'bass');
+   ev.push({at:b*beat,dur:.15,f:75,vol:.1,kind:'kick'});
+   if(b%4===2||detail>1&&b%4===3)ev.push({at:b*beat,dur:.13,f:185,vol:.055,kind:'snare'});
+   // Hi-hats and softer ghost percussion
+   for(let h=0;h<2;h++)ev.push({at:(b+h*.5)*beat,dur:.065,f:480+(seed%100),vol:h?.017:.023,kind:'hat'});
+   if(detail>1&&beatInBar===3)ev.push({at:(b+.75)*beat,dur:.08,f:160,vol:.028,kind:'snare'});
+   const melody=[0,2,4,2,5,4,2,1,0,3,4,6,5,4,2,1];
+   for(let h=0;h<2;h++){
+      if(!chorus&&h===1&&(b+seed)%3===0)continue;
+      const degree=root+melody[(b*2+h+seed%7)%melody.length];
+      add((b+h*.5)*beat,beat*(h?.43:.63),degree,1,chorus?.13:.102,'lead');
+   }
+   if(detail>1||chorus)add((b+.5)*beat,beat*.44,root+([0,2,4,2][b%4]),0,detail>2?.065:.04,'bell');
+ }
+ return ev;
+}
+function synthSample(e,t){
+ const d=t-e.at;if(d<0||d>=e.dur)return 0;
+ const a=Math.min(1,d/.018),release=Math.min(1,(e.dur-d)/.14),env=Math.max(0,a*release);
+ const phase=2*Math.PI*e.f*d;
+ if(e.kind==='pad')return (Math.sin(phase)+Math.sin(phase*1.005)*.5)*e.vol*env*.52;
+ if(e.kind==='bass')return Math.sin(phase)*e.vol*env*.8;
+ if(e.kind==='lead')return (Math.sin(phase)+.25*Math.sin(phase*2)+.12*Math.sin(phase*3))*e.vol*env;
+ if(e.kind==='bell')return (Math.sin(phase)+.34*Math.sin(phase*2.01))*e.vol*env;
+ if(e.kind==='hat')return (Math.sin(phase*4.37)+Math.sin(phase*7.31)+Math.sin(phase*12.13))*e.vol*Math.exp(-d*52)*.3;
+ if(e.kind==='kick')return Math.sin(phase*(1.1-d*3))*e.vol*Math.exp(-d*42);
+ return Math.sin(phase)*e.vol*Math.exp(-d*60);
+}
+async function audioBufferForSong(song,rate=22050){
+ const events=songEvents(song),length=Math.ceil(rate*(song.duration+.5)),samples=new Float32Array(length);
+ for(const e of events){const start=Math.floor(e.at*rate),end=Math.min(length,Math.ceil((e.at+e.dur)*rate));for(let i=start;i<end;i++)samples[i]+=synthSample(e,i/rate)}
+ let max=0;for(let i=0;i<length;i++)max=Math.max(max,Math.abs(samples[i]));const gain=Math.min(1,0.85/(max||1));for(let i=0;i<length;i++)samples[i]*=gain;
+ return {samples,rate};
+}
+function stopSong(){if('speechSynthesis' in window)window.speechSynthesis.cancel();if(playingTimer){clearTimeout(playingTimer);playingTimer=null}playingNodes.forEach(n=>{try{n.stop()}catch{}});playingNodes=[]}
+async function playSong(song,button){
+ try{stopSong();button.disabled=true;button.textContent='Готовим звук…';const C=window.AudioContext||window.webkitAudioContext;if(!C)throw Error('Аудио не поддерживается.');audioCtx=audioCtx||new C();await audioCtx.resume();const {samples,rate}=await audioBufferForSong(song,22050);const buf=audioCtx.createBuffer(1,samples.length,rate);buf.copyToChannel(samples,0);const src=audioCtx.createBufferSource();src.buffer=buf;src.connect(audioCtx.destination);src.start();playingNodes=[src];button.textContent='♫ Играет';src.onended=()=>{button.textContent='▶ Прослушать';button.disabled=false;playingNodes=[]};}
+ catch(err){button.textContent='▶ Прослушать';alert('Не удалось воспроизвести: '+err.message)}finally{button.disabled=false}
+}
+async function downloadSong(song,button){
+ if(songBusy)return;songBusy=true;button.disabled=true;button.textContent='Готовим WAV…';
+ try{
+  const {samples,rate}=await audioBufferForSong(song,22050),bytes=new ArrayBuffer(44+samples.length*2),v=new DataView(bytes);
+  const str=(off,s)=>{for(let i=0;i<s.length;i++)v.setUint8(off+i,s.charCodeAt(i))};
+  str(0,'RIFF');v.setUint32(4,36+samples.length*2,true);str(8,'WAVE');str(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,rate,true);v.setUint32(28,rate*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);str(36,'data');v.setUint32(40,samples.length*2,true);
+  for(let i=0;i<samples.length;i++)v.setInt16(44+i*2,Math.max(-32768,Math.min(32767,Math.round(samples[i]*32767))),true);
+  const url=URL.createObjectURL(new Blob([bytes],{type:'audio/wav'}));const a=document.createElement('a');a.href=url;a.download='Abyshka-song-'+song.version+'.wav';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
+ }catch(err){alert('Не удалось создать WAV: '+err.message)}finally{songBusy=false;button.disabled=false;button.textContent='⬇ WAV'}
+}
+
+// v10 photo editor. Only exports user-provided images in this browser.
+let photoSource=null,photoRotation=0;
+const photoCanvas=document.createElement('canvas');
+function photoFilter(){return `brightness(${$('brightness').value}%) contrast(${$('contrast').value}%) saturate(${$('saturation').value}%) blur(${$('blur').value}px)`}
+function refreshPhoto(){
+ if(!photoSource)return;
+ const dims=photoRotation%180===0?[photoSource.width,photoSource.height]:[photoSource.height,photoSource.width];
+ const max=1800,scale=Math.min(1,max/Math.max(...dims));
+ photoCanvas.width=Math.max(1,Math.round(dims[0]*scale));photoCanvas.height=Math.max(1,Math.round(dims[1]*scale));
+ const ctx=photoCanvas.getContext('2d');ctx.save();ctx.translate(photoCanvas.width/2,photoCanvas.height/2);ctx.rotate(photoRotation*Math.PI/180);ctx.filter=photoFilter();
+ ctx.drawImage(photoSource,-photoSource.width*scale/2,-photoSource.height*scale/2,photoSource.width*scale,photoSource.height*scale);ctx.restore();
+ $('photoPreview').src=photoCanvas.toDataURL('image/jpeg',.88);
+ $('photoPreview').style.display='block';$('photoSliders').style.display='block';
+}
+$('photoUpload').addEventListener('change',async e=>{
+ const file=e.target.files?.[0];if(!file)return;
+ if(!file.type.startsWith('image/')){alert('Выбери изображение');return}
+ try{
+  const url=URL.createObjectURL(file);const im=new Image();
+  await new Promise((resolve,reject)=>{im.onload=resolve;im.onerror=reject;im.src=url});
+  photoSource=im;photoRotation=0;refreshPhoto();URL.revokeObjectURL(url);
+ }catch(err){alert('Не удалось открыть фото: '+err.message)}
+});
+for(const name of ['brightness','contrast','saturation','blur'])$(name).oninput=()=>{$(name+'Val').textContent=$(name).value;refreshPhoto()};
+$('rotatePhoto').onclick=()=>{photoRotation=(photoRotation+90)%360;refreshPhoto()};
+$('resetPhoto').onclick=()=>{photoRotation=0;for(const name of ['brightness','contrast','saturation','blur']){$(name).value=name==='blur'?0:100;$(name+'Val').textContent=$(name).value}refreshPhoto()};
+$('savePhoto').onclick=()=>{if(!photoSource)return alert('Сначала загрузи фото');const a=document.createElement('a');a.download='Abyshka-photo.jpg';a.href=photoCanvas.toDataURL('image/jpeg',.94);a.click()};
+function validatedEndpoint(endpoint){const url=new URL(endpoint);if(url.protocol!=='https:'&&!['localhost','127.0.0.1'].includes(url.hostname))throw Error('Для сервиса изображений нужен HTTPS.');return url.toString()}
+function imageDataUrl(value){
+ const entry=value?.data?.[0];if(entry?.b64_json)return 'data:image/png;base64,'+entry.b64_json;
+ // URL responses require CORS on the image source to export. We show them directly.
+ if(entry?.url && /^https:\/\//.test(entry.url))return entry.url;
+ throw Error('Сервис не вернул изображение в ожидаемом формате.');
+}
+async function requestGeneratedImage(prompt){
+ if(!apiKey)throw Error('Укажи ключ API в настройках ⚙.');
+ const endpoint=validatedEndpoint(config.imageEndpoint);
+ const res=await fetch(endpoint,{method:'POST',headers:{'Authorization':'Bearer '+apiKey,'Content-Type':'application/json'},body:JSON.stringify({model:config.imageModel,prompt,size:'1024x1024',n:1})});
+ const data=await res.json();if(!res.ok)throw Error(data.error?.message||'Ошибка сервиса изображений: '+res.status);
+ return imageDataUrl(data);
+}
+async function requestEditedImage(prompt){
+ if(!photoSource)throw Error('Сначала выбери фотографию.');
+ if(!apiKey)throw Error('Укажи ключ API в настройках ⚙.');
+ const endpoint=validatedEndpoint(config.imageEditEndpoint);
+ const file=await new Promise((resolve,reject)=>photoCanvas.toBlob(b=>b?resolve(b):reject(Error('Не удалось подготовить фото')),'image/png'));
+ const body=new FormData();body.append('model',config.imageModel);body.append('prompt',prompt);body.append('image',file,'photo.png');body.append('size','1024x1024');
+ const res=await fetch(endpoint,{method:'POST',headers:{Authorization:'Bearer '+apiKey},body});const data=await res.json();
+ if(!res.ok)throw Error(data.error?.message||'Ошибка редактирования: '+res.status);
+ return imageDataUrl(data);
+}
+// Бесплатный справочный поиск: только Википедия, без ключа и без обхода CORS.
+function isReferenceQuestion(q){
+ const t=q.toLowerCase().trim();
+ if(t.length<8||t.length>190)return false;
+ if(/\b(что делать|помоги|сломал|сломался|разбил|разбился|горит|течёт|течет|болит|опасно|срочно|сколько будет|посчитай|реши|напиши код)\b/i.test(t))return false;
+ return /^(что такое|кто такой|кто такая|когда|где находится|расскажи о|расскажи про|объясни|что означает|почему|какая|какой|какие|кто |что |где )/i.test(t);
+}
+async function lookupWikipedia(question){
+ if(config.webMode==='off'||!navigator.onLine||!isReferenceQuestion(question))return null;
+ const query=question.replace(/^(что такое|кто такой|кто такая|расскажи о|расскажи про|объясни|что означает|почему|какая|какой|какие|кто|что|где находится|где|когда)\s+/i,'').replace(/[?!.,]+$/,'').trim();
+ if(query.length<3)return null;
+ const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),5500);
+ try{
+   const base='https://ru.wikipedia.org/w/api.php';
+   const params=new URLSearchParams({action:'query',generator:'search',gsrsearch:query,gsrlimit:'3',prop:'extracts|info',exintro:'1',explaintext:'1',exchars:'1100',inprop:'url',format:'json',origin:'*'});
+   const response=await fetch(base+'?'+params,{signal:controller.signal,cache:'no-store'});
+   if(!response.ok)return null;
+   const json=await response.json();const pages=Object.values(json.query?.pages||{}).filter(p=>p.extract&&p.fullurl);
+   if(!pages.length)return null;
+   const best=pages[0];
+   const clean=best.extract.replace(/\s+/g,' ').trim();
+   if(clean.length<70)return null;
+   return 'По данным Википедии — «'+best.title+'»:\n'+clean+'\n\nИсточник: '+best.fullurl+'\nЭто справочная информация, а не проверка всех сайтов в реальном времени.';
+ }catch(e){return null}finally{clearTimeout(timer)}
+}
+function combinedOfflineAnswer(text,level){
+ const direct=advancedHelp(text);
+ if(direct)return direct;
+ return knowledgeReply(text,level!=='fast');
+}
+async function progressThinking(pending,c,stage,label,delay){
+  if(!pending.showStages)return;
+  pending.stage=stage;pending.stageLabel=label;
+  if(active===c.id)render(true);
+  if(delay)await wait(delay);
+}
+async function send(){
+  if(busy) return;
+  const text=$('input').value.trim();
+  if(!text) return;
+  const c=current();
+  const requestedMode=composerMode;
+  if(!c.messages.length) c.title=text.slice(0,34)+(text.length>34?'…':'');
+  c.messages.push({role:'user',content:text,mode:requestedMode});
+  $('input').value=''; $('input').style.height='auto'; save(); render(true);
+  busy=true; $('send').disabled=true;
+  const pending={role:'assistant',content:'',pending:true,stage:0,showStages:requestedMode==='chat'};
+  c.messages.push(pending); pruneChat(c); render(true);
+  try{
+    if(requestedMode==='image'){
+      const picture=config.imageProvider==='api'?await requestGeneratedImage(text):artGenerator(text);
+      c.messages[c.messages.indexOf(pending)]={role:'assistant',content:config.imageProvider==='api'?'🎨 Изображение получено от подключённого сервиса.':'🎨 Готова офлайн-иллюстрация (не фотореалистичный ИИ).',image:picture,prompt:text};
+      save(); render(true);
+      return;
+    }
+    if(requestedMode==='photo'){
+      const picture=(config.imageProvider==='api'&&text)?await requestEditedImage(text):null;
+      c.messages[c.messages.indexOf(pending)]=picture?{role:'assistant',content:'📷 Фото обработано ИИ-сервисом.',image:picture,prompt:text}:{role:'assistant',content:'📷 Фото можно редактировать с помощью ползунков выше: яркость, контраст, насыщенность, размытие и поворот. Чтобы изменить содержимое фото словами, настрой сервис изображений в ⚙ и введи описание изменений.'};
+      save();render(true);return;
+    }
+    if(requestedMode==='song'){
+      await wait(150);
+      const song=composeSong(text);
+      c.messages[c.messages.indexOf(pending)]={role:'assistant',content:'🎵 Готова оригинальная мелодия к твоему тексту. Можно прослушать, сохранить в WAV или улучшить аранжировку.',song};
+      save();render(true);return;
+    }
+    if(requestedMode==='trip'){
+      await wait(100);
+      const previous=latestHotelPlan(c);
+      if(previous&&asksHotelAdvice(text)){
+        c.messages[c.messages.indexOf(pending)]={role:'assistant',content:'Вот варианты проживания для '+previous.destination+'. Я выделила подходящую категорию; нажми «Найти похожие», чтобы увидеть настоящие отели и фотографии.',hotelOptions:previous};
+        save();render(true);return;
+      }
+      const plan=buildTripPlan(text);
+      c.messages[c.messages.indexOf(pending)]={role:'assistant',content:plan.text,trip:plan};
+      save(); render(true);
+      return;
+    }
+
+    let answer='';
+    const previousHotel=latestHotelPlan(c);
+    if(previousHotel&&asksHotelAdvice(text)){
+      c.messages[c.messages.indexOf(pending)]={role:'assistant',content:'Для '+previousHotel.destination+' я подобрала категории отелей. Ниже можно сравнить варианты и открыть поиск настоящих гостиниц.',hotelOptions:previousHotel};
+      save();render(true);return;
+    }
+    if(config.mode==='api'){
+      pending.showStages=false;pending.stageLabel='Ожидаю ответ подключённой модели…';render(true);
+      if(!config.endpoint||!config.model||!apiKey) throw Error('Заполни адрес API, название модели и временный ключ в настройках ⚙.');
+      const url=new URL(config.endpoint);
+      if(url.protocol!=='https:' && !['localhost','127.0.0.1'].includes(url.hostname)) throw Error('Для API требуется HTTPS.');
+      const messages=[{role:'system',content:'Ты Abyshka.ai — полезный, умный и честный русскоязычный помощник. Отвечай ясно и дружелюбно.'+(config.think?' Перед ответом проверь тему именно последнего вопроса, возможные причины и альтернативы, проверь факты и дай точный ответ. Не переноси тему прошлого сообщения без явного уточнения.':' Проверь смысл последнего вопроса, не путай темы, отвечай ясно и по существу.')}, ...c.messages.filter(m=>!m.pending).slice(-24).map(m=>({role:m.role,content:m.content}))];
+      const controller=new AbortController();
+      const timer=setTimeout(()=>controller.abort(),45000);
+      try{
+        const res=await fetch(url.toString(),{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+apiKey},body:JSON.stringify({model:config.model,messages,temperature:.7}),signal:controller.signal});
+        const body=await res.text();
+        let data; try{data=JSON.parse(body)}catch{throw Error('Сервер вернул не JSON. Код HTTP '+res.status)}
+        if(!res.ok) throw Error(data.error?.message||('Ошибка API: '+res.status));
+        answer=data.choices?.[0]?.message?.content;
+        if(!answer || typeof answer!=='string') throw Error('Модель не вернула текстовый ответ.');
+      }finally{clearTimeout(timer)}
+    } else {
+      // Offline knowledge retrieval is synchronous; these steps display actual stages,
+      // with a short readable delay, not a claim of model-level reasoning.
+      await progressThinking(pending,c,0,'Понимаю вопрос…',config.think?480:260);
+      const contextual=contextualOfflineAnswer(text,c);
+      const online=await lookupWikipedia(text);
+      await progressThinking(pending,c,1,'Проверяю встроенные знания…',config.think?650:320);
+      answer=online||contextual||combinedOfflineAnswer(text,'deep');
+      await progressThinking(pending,c,2,'Формулирую ответ…',config.think?530:260);
+
+    }
+    c.messages[c.messages.indexOf(pending)]={role:'assistant',content:answer};
+    save(); render(true);
+    if(config.voiceEnabled && answer && active===c.id) speakText(answer);
+  }catch(err){
+    c.messages[c.messages.indexOf(pending)]={role:'assistant',content:'Не удалось получить ответ: '+err.message+'\nПроверь настройки и, если нужен API, доступ к интернету и CORS.'};
+    save(); render(true);
+  }finally{
+    busy=false; $('send').disabled=false; if(!matchMedia('(pointer:coarse)').matches) $('input').focus();
+  }
+}
+
+$('voiceToggle').onclick=()=>{config.voiceEnabled=!config.voiceEnabled;saveConfig();$('voiceToggle').textContent='🔊 Озвучивать ответы: '+(config.voiceEnabled?'вкл.':'выкл.')};
+$('voiceStop').onclick=()=>{if('speechSynthesis' in window)window.speechSynthesis.cancel()};
+$('voiceSelect').onchange=()=>{config.voiceURI=$('voiceSelect').value;saveConfig()};
+if('speechSynthesis' in window){window.speechSynthesis.onvoiceschanged=updateVoices;setTimeout(updateVoices,300)}
+$('voiceToggle').textContent='🔊 Озвучивать ответы: '+(config.voiceEnabled?'вкл.':'выкл.');
+if(window.visualViewport){window.visualViewport.addEventListener('resize',()=>{const m=$('messages');if(m&&m.dataset.followBottom==='1')requestAnimationFrame(()=>m.scrollTop=m.scrollHeight)})}
+$('send').onclick=send;
+$('hideKeyboard').addEventListener('click',()=>{document.activeElement?.blur();$('input').blur();});
+$('input').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){if(matchMedia('(pointer:coarse)').matches)return;e.preventDefault();send()}});
+$('input').addEventListener('input',()=>{const el=$('input'); el.style.height='auto'; el.style.height=Math.min(el.scrollHeight,145)+'px'});
+$('newChat').onclick=newChat;
+$('searchChats').addEventListener('input',e=>{chatFilter=e.target.value.trim().toLowerCase();renderChats()});
+function setTheme(t){document.documentElement.dataset.theme=t;try{localStorage.setItem(THEME_KEY,t)}catch(e){}$('themeToggle').textContent=t==='light'?'☾ Тёмная тема':'☀ Светлая тема'}
+setTheme(localStorage.getItem(THEME_KEY)==='light'?'light':'dark');
+$('themeToggle').onclick=()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark');
+$('exportChats').onclick=()=>{const blob=new Blob([JSON.stringify({app:'Abyshka.ai',version:16,exportedAt:new Date().toISOString(),chats},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='abyshka-chats-'+new Date().toISOString().slice(0,10)+'.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000)};
+
+$('clear').onclick=()=>{if(busy){alert('Дождись завершения ответа.');return}if(confirm('Удалить сообщения текущего чата?')){current().messages=[]; current().title='Новый чат'; save(); render()}};
+$('chatMode').onclick=()=>setMode('chat');
+$('imageMode').onclick=()=>setMode('image');
+$('tripMode').onclick=()=>setMode('trip');
+$('songMode').onclick=()=>setMode('song');
+function toggleThinkHarder(){config.think=!config.think;config.thinkingLevel=config.think?'deep':'fast';saveConfig();render()}
+$('thinkToggle').onclick=toggleThinkHarder;
+$('thinkHarder').onclick=toggleThinkHarder;
+ $('photoMode').onclick=()=>setMode('photo');
+$('shortReply').onclick=()=>{config.answerSize='short';saveConfig();render()};
+$('fullReply').onclick=()=>{config.answerSize='full';saveConfig();render()};
+$('mobileMenu').onclick=()=>document.body.classList.add('sideOpen');
+$('veil').onclick=()=>document.body.classList.remove('sideOpen');
+
+function openSettings(){
+  $('mode').value=config.mode;
+  $('webMode').value=config.webMode||'auto';
+  $('endpoint').value=config.endpoint;
+  $('model').value=config.model;
+  $('apiKey').value=apiKey;
+  $('imageProvider').value=config.imageProvider; $('imageEndpoint').value=config.imageEndpoint; $('imageEditEndpoint').value=config.imageEditEndpoint; $('imageModel').value=config.imageModel;
+  toggleApi();
+  if(!$('settings').open)$('settings').showModal();
+  document.body.classList.remove('sideOpen');
+}
+function toggleApi(){ $('apiOptions').style.display=$('mode').value==='api'?'block':'none'; }
+$('mode').onchange=toggleApi;
+$('settingsTop').onclick=openSettings;
+$('settingsSide').onclick=openSettings;
+$('cancelSettings').onclick=()=>$('settings').close();
+$('saveSettings').onclick=()=>{
+  config={...config,mode:$('mode').value,webMode:$('webMode').value,endpoint:$('endpoint').value.trim(),model:$('model').value.trim(),imageProvider:$('imageProvider').value,imageEndpoint:$('imageEndpoint').value.trim(),imageEditEndpoint:$('imageEditEndpoint').value.trim(),imageModel:$('imageModel').value.trim()};
+  apiKey=$('apiKey').value.trim();
+  saveConfig(); $('settings').close(); render();
+};
+
+render();
+updateVoices();
+</script>
+<script>
+if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js").catch(err => console.warn("PWA offline cache:",err)));
+}
+</script>
+</body>
+</html>
